@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="Generator" content="EditPlus®">
+		<meta name="Author" content="king">
+		<meta name="Keywords" content="">
+		<meta name="Description" content="">
+		<title>加载</title>
+	</head>
+	<style type="text/css">
+		*{padding:0;margin:0;}
+		body{family:"微软雅黑";font-size:12px;}
+		a{text-decoration:none;}
+		ul,ol li{list-style:none;} 
+		
+	</style>
+	<script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
+	<script type="text/javascript" src="loading/loading.js"></script>
+	<body>
+	  <div id="loading" style="width:400px;height:200px;border:1px solid red;margin:100px auto;"></div>
+	  <script type="text/javascript">
+		
+		loading("数据加载中....",1000,true);
+
+		$.loading({target:$("#loading"),mark:""});
+
+	  </script>
+	</body>
+</html>
