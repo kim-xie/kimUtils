@@ -132,7 +132,7 @@
 
 	//定位工具
 	var kimUtil = {
-		_position : function($dom,amark){//居中定位
+		position : function($dom,amark){//居中定位
 			var windowWidth = $(window).width();
 			var windowHeight= $(window).height();
 			var width = $dom.width();
@@ -146,7 +146,7 @@
 			return this;
 		},
 
-		_positionParent : function($dom,$parent,atop){//相对父元素居中定位
+		positionParent : function($dom,$parent,atop){//相对父元素居中定位
 			var parentWidth = $parent.width();
 			var parentHeight= $parent.height();
 			var width = $dom.width();
@@ -160,7 +160,7 @@
 		resize : function($dom){//窗体响应式
 			var $this = this;
 			$(window).resize(function(){
-				$this._position($dom);	
+				$this.position($dom);	
 			});
 		},
 
