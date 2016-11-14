@@ -18,7 +18,7 @@
 			return ParentPath;
 		}
 	}
-	loadingCss.css("skin/kimComboBox.css");
+	loadingCss.css("skin/comboBox.css");
 
 	//定义jquery对象
 	$.fn.kimComboBox = function(options) {
@@ -53,8 +53,8 @@
 		}
 
 		kimComboBox +=  "	<span class='icon'>"+
-						"		<i class='fa fa-times selectclear pointer cd'></i>"+
-						"		<i class='fa fa-chevron-down sortDown pointer cd'></i>"+
+						"		<i class='fa fa-times selectclear pointer c9'></i>"+
+						"		<i class='fa fa-chevron-down sortDown pointer c9'></i>"+
 						"	</span>"+
 						"</span>";
 
@@ -86,7 +86,9 @@
 		if(opts.height){
 			$this.find(".kimComboBox").height(opts.height);
 		}
-		if(opts.listWidth){
+		if(typeof opts.listWidth == "string" && opts.listWidth.indexOf("%") != -1){
+			$this.find("."+opts.listClass+"").width($this.width());
+		}else{
 			$this.find("."+opts.listClass+"").width(opts.listWidth);
 		}
 		if(opts.listHeight){
@@ -154,14 +156,14 @@
 						checkedIdArr.push($(this).parent().data("id"));
 					});
 					$this.find(".contents").text(checkedNameArr.join(",")).attr("title",checkedNameArr.join(","));
-					$this.find("#"+opts.idObj+"").val(checkedIdArr.join(",")).attr("title",checkedIdArr.join(","));
+					$this.find(opts.idObj).val(checkedIdArr.join(",")).attr("title",checkedIdArr.join(","));
 				}else{
 					$(this).find("input:checkbox").trigger("click");
 					$(this).parent().siblings().find("input:checkbox").prop("checked",false);
 					aText = $(this).text();
 					aId = $(this).data("id");
 					$this.find(".contents").text(aText).attr("title",aText);
-					$this.find("#"+opts.idObj+"").val(aId).attr("title",aId);
+					$this.find(opts.idObj).val(aId).attr("title",aId);
 				}
 				showClear($this);
 			});
