@@ -1,4 +1,4 @@
-(function($){
+;(function($){
 	var loadingCss = {
 		css: function(path){
 			var path = loadingCss.getParentPath() + path;
@@ -20,9 +20,9 @@
 	}
 	loadingCss.css("skin/tooltip.css");
 	//����jQuery����
-	$.fn.tmTip = function(options){
+	$.fn.kimTip = function(options){
 		return this.each(function(){
-			var opts = $.extend({},$.fn.tmTip.defaults,options);//,$.fn.tmTip.parseOptions($(this))
+			var opts = $.extend({},$.fn.kimTip.defaults,options);//,$.fn.kimTip.parseOptions($(this))
 			//��ʼ������
 			if(opts.event == 'hover'){
 				$(this).hover(function(){
@@ -176,7 +176,7 @@
 		$('.tm-tips').click(function(){$(this).remove();});
 	};
 
-	//$.fn.tmTip.parseOptions = function($target) {
+	//$.fn.kimTip.parseOptions = function($target) {
 	//	return {
 	//		width : $target.data("width"),
 	//		height : $target.data("height"),
@@ -193,7 +193,7 @@
 	//	};
 	//};
 
-	$.fn.tmTip.defaults ={
+	$.fn.kimTip.defaults ={
 		width : 0,//���
 		height : 0,//�߶����Ϊ0��Ϊ�Զ��߶�
 		event:"click",//�������¼�����

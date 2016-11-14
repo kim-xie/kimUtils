@@ -1,8 +1,8 @@
 ;(function($){
 	//定义jQuery对象
-	$.fn.vilidate = function(options){
+	$.fn.kimVilidate = function(options){
 		return this.each(function(){
-			var opts = $.extend({},$.fn.vilidate.defaults,options);
+			var opts = $.extend({},$.fn.kimVilidate.defaults,options);
 			//初始化事件
 			initEvent($(this),opts);
 		});
@@ -145,7 +145,7 @@
 		}
 	};
 
-	$.fn.vilidate.defaults ={
+	$.fn.kimVilidate.defaults ={
 		// 提示信息
 		tip_success:'验证成功', 
 		tip_required:'值不能为空', 

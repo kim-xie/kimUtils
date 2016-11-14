@@ -1,8 +1,7 @@
-(function($){
-	
+;(function($){
 	var loadingCss = {
 		css: function(path){
-			var path = loadingCss.getParentPath() + path;
+			var path = this.getParentPath() + path;
 			if(!path || path.length === 0){
 				throw new Error('argument "path" is required !');
 			}

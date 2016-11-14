@@ -18,12 +18,12 @@
 			return ParentPath;
 		}
 	}
-	loadingCss.css("skin/comboBox.css");
+	loadingCss.css("skin/kimComboBox.css");
 
 	//定义jquery对象
-	$.fn.comboBox = function(options) {
+	$.fn.kimComboBox = function(options) {
 		return this.each(function() {
-			var opts = $.extend({}, $.fn.comboBox.defaults, options);
+			var opts = $.extend({}, $.fn.kimComboBox.defaults, options);
 			init($(this), opts);
 			initEvent($(this),opts);
 		});
@@ -32,39 +32,39 @@
 	//初始化方法
 	function init($this,opts){
 
-		var comboBox = "<div id='comboboxWrap' class='comboboxWrap'>";
+		var kimComboBox = "<div id='kimComboBoxWrap' class='kimComboBoxWrap'>";
 		
 		if(opts.addIdsObj && opts.validate){
-			comboBox +=	"<input id='"+opts.removeIdsObj+"' name='"+opts.removeIdsObj+"' type='hidden' class='vilidateObj removeIds' vilidate='"+opts.validateType+"'/>";
+			kimComboBox +=	"<input id='"+opts.removeIdsObj+"' name='"+opts.removeIdsObj+"' type='hidden' class='vilidateObj removeIds' vilidate='"+opts.validateType+"'/>";
 		}
 		if(opts.removeIdsObj && opts.validate){
-			comboBox +=	"<input id='"+opts.addIdsObj+"' name='"+opts.addIdsObj+"' type='hidden' class='vilidateObj addIds' vilidate='"+opts.validateType+"'/>";
+			kimComboBox +=	"<input id='"+opts.addIdsObj+"' name='"+opts.addIdsObj+"' type='hidden' class='vilidateObj addIds' vilidate='"+opts.validateType+"'/>";
 		}
 		if(opts.idObj && opts.validate){
-			comboBox +=	"<input id='"+opts.idObj+"' name='"+opts.idObj+"' value='"+opts.idValue+"' type='hidden' class='vilidateObj ids' vilidate='"+opts.validateType+"'/>";
+			kimComboBox +=	"<input id='"+opts.idObj+"' name='"+opts.idObj+"' value='"+opts.idValue+"' type='hidden' class='vilidateObj ids' vilidate='"+opts.validateType+"'/>";
 		}
 		
-		comboBox += "<span class='comboBox'>";
+		kimComboBox += "<span class='kimComboBox'>";
 			
 		if(opts.textValue){
-			comboBox +=	"<span class='vilidateObj contents ellipsis' vilidate='"+opts.validateType+"'>"+opts.textValue+"</span>";
+			kimComboBox += "<span class='vilidateObj contents ellipsis' vilidate='"+opts.validateType+"'>"+opts.textValue+"</span>";
 		}else{
-			comboBox += "<span class='vilidateObj contents ellipsis' vilidate='"+opts.validateType+"'></span>";
+			kimComboBox += "<span class='vilidateObj contents ellipsis' vilidate='"+opts.validateType+"'></span>";
 		}
 
-		comboBox +=  "	<span class='icon'>"+
-					 "		<i class='fa fa-times selectclear pointer cd'></i>"+
-					 "		<i class='fa fa-chevron-down sortDown pointer cd'></i>"+
-					 "	</span>"+
-					 "</span>";
+		kimComboBox +=  "	<span class='icon'>"+
+						"		<i class='fa fa-times selectclear pointer cd'></i>"+
+						"		<i class='fa fa-chevron-down sortDown pointer cd'></i>"+
+						"	</span>"+
+						"</span>";
 
 
 		if(opts.listId || opts.listClass){
-			comboBox += "<div id='"+opts.listId+"' class='"+opts.listClass+" none' style='overflow:auto;position:absolute;z-index:1000;'>";
+			kimComboBox += "<div id='"+opts.listId+"' class='"+opts.listClass+" none' style='overflow:auto;position:absolute;z-index:1000;'>";
 		} 
 
 		if(opts.listType && opts.listType == "list" && opts.listcontents ){
-			comboBox += "<ul>";
+			kimComboBox += "<ul>";
 			var liDom = "";
 			for(var i=0;i<opts.listcontents.length;i++){
 				if(opts.showCheckBox){
@@ -73,18 +73,18 @@
 					liDom += "<li><a href='javascript:void(0)' style='display:block;padding:5px;font-size:14px' data-id='"+opts.listids[i]+"'>"+opts.listcontents[i]+"</a></li>";
 				}
 			}
-			comboBox += liDom + "</ul>";
+			kimComboBox += liDom + "</ul>";
 		}
 
-		comboBox += "</div></div>";
+		kimComboBox += "</div></div>";
 
-		$this.append(comboBox);
+		$this.append(kimComboBox);
 
 		if(opts.width){
-			$this.find(".comboBox").width(opts.width);
+			$this.find(".kimComboBox").width(opts.width);
 		}
 		if(opts.height){
-			$this.find(".comboBox").height(opts.height);
+			$this.find(".kimComboBox").height(opts.height);
 		}
 		if(opts.listWidth){
 			$this.find("."+opts.listClass+"").width(opts.listWidth);
@@ -107,7 +107,7 @@
 		showClear($this);
 
 		//展开收起下拉列表
-		$this.find(".comboBox").click(function(e){
+		$this.find(".kimComboBox").click(function(e){
 			var e = e || window.event || arguments.callee.caller.arguments[0]; //兼容firefox
 			stopPropagation(e);
 			$(this).parent().find("."+opts.listClass+"").toggle();
@@ -123,16 +123,16 @@
 	    $this.find(".selectclear").click(function(e){
 			var e = e || window.event || arguments.callee.caller.arguments[0]; //兼容firefox
 			stopPropagation(e);
-			$(this).parents("#comboboxWrap").find(".contents").text("");
+			$(this).parents("#kimComboBoxWrap").find(".contents").text("");
 			
 			if(opts.listType == "tree"){
-				$(this).parents("#comboboxWrap").find(".trees .search_in").val("");
-				$(this).parents("#comboboxWrap").find(".trees .tm-tree-checkbox").removeClass("tm-tree-checkbox-checked").removeClass("tm-tree-checkbox-focus");
-				$(this).parents("#comboboxWrap").find(".trees .tm-tree-radio").removeClass("tm-tree-radio-checked").removeClass("tm-tree-radio-focus");
-				$(this).parents("#comboboxWrap").find(".trees .tree .toggle").removeClass("first_collapsable").addClass("expandable");
-				$(this).parents("#comboboxWrap").find(".trees .tree .father").next().hide();
+				$(this).parents("#kimComboBoxWrap").find(".trees .search_in").val("");
+				$(this).parents("#kimComboBoxWrap").find(".trees .tm-tree-checkbox").removeClass("tm-tree-checkbox-checked").removeClass("tm-tree-checkbox-focus");
+				$(this).parents("#kimComboBoxWrap").find(".trees .tm-tree-radio").removeClass("tm-tree-radio-checked").removeClass("tm-tree-radio-focus");
+				$(this).parents("#kimComboBoxWrap").find(".trees .tree .toggle").removeClass("first_collapsable").addClass("expandable");
+				$(this).parents("#kimComboBoxWrap").find(".trees .tree .father").next().hide();
 			}else if(opts.listType == "list" && opts.showCheckBox){
-				$(this).parents("#comboboxWrap").find("input:checkbox").prop("checked",false);
+				$(this).parents("#kimComboBoxWrap").find("input:checkbox").prop("checked",false);
 			}
 			$(this).hide();
 		});
@@ -175,7 +175,7 @@
 	}
 
 	//默认参数
-	$.fn.comboBox.defaults = {
+	$.fn.kimComboBox.defaults = {
 		width:"100%",//展示框的宽度
 		height:"30px",//展示框的高度
 		validate:true,//是否需要验证
@@ -185,8 +185,8 @@
 		idObj:"",//存放ID的Dom对象
 		idValue:"",//存放的ID值
 		textValue:"--请选择一个值--",//展示框的显示值
-		listId:"comboBoxList",//下拉框的ID属性
-		listClass:"comboBoxList",//下拉框的class属性
+		listId:"kimComboBoxList",//下拉框的ID属性
+		listClass:"kimComboBoxList",//下拉框的class属性
 		listWidth:"100%",//下拉框的宽度
 		listHeight:"200px",//下拉框的高度
 		listBackground:"#fff",//下拉框的背景色

@@ -4,12 +4,12 @@
 .c9{color:#999;}
 .cd{color:#ddd;}
 .ellipsis{width:100%;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
-.comboBox{display:inline-block;background:#fff;border:1px solid tranparents;margin-bottom:0;user-select:none;}
-.comboBox .contents{display:inline-block;float:left;width:88%;height:100%;line-height:28px;text-indent:0.5em;text-align:left;font-size:14px;outline:none;overflow:hidden;}
-.comboBox .icon{float:right;display:inline-block;width:12%;height:100%;}
-.comboBox .icon i{display:inline-block;font-size:8px;line-height:28px;}
-.comboBox .icon i.selectclear{float:left;display:none;cursor:pointer;}
-.comboBox:hover .selectclear{display:block;}
-.comboBox .icon i.sortDown{float:right;margin-right:3px;line-height:26px;}
-.comboboxWrap ul li{text-align:left;}
-.comboboxWrap ul li a:hover{background:#ccc;}
+.kimComboBox{display:inline-block;background:#fff;border:1px solid transparent;margin-bottom:0;user-select:none;}
+.kimComboBox .contents{display:inline-block;float:left;width:88%;height:100%;line-height:28px;text-indent:0.5em;text-align:left;font-size:14px;outline:none;overflow:hidden;}
+.kimComboBox .icon{float:right;display:inline-block;width:12%;height:100%;}
+.kimComboBox .icon i{display:inline-block;font-size:8px;line-height:28px;}
+.kimComboBox .icon i.selectclear{float:left;display:none;cursor:pointer;}
+.kimComboBox:hover .selectclear{display:block;}
+.kimComboBox .icon i.sortDown{float:right;margin-right:3px;line-height:26px;}
+.kimComboBoxWrap ul li{text-align:left;}
+.kimComboBoxWrap ul li a:hover{background:#ccc;}

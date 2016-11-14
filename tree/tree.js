@@ -32,9 +32,9 @@
 		var tree_zindex = 1;
 		var rootId = "";
 
-		$.fn.tmTree = function(options) {
+		$.fn.kimTree = function(options) {
 			return this.each(function() {
-				var opts = $.extend({}, $.fn.tmTree.defaults, $.fn.tmTree.parseOptions($(this)), options);
+				var opts = $.extend({}, $.fn.kimTree.defaults, $.fn.kimTree.parseOptions($(this)), options);
 				init($(this), opts);
 			});
 		};
@@ -830,14 +830,14 @@
 			}
 		};
 		
-		$.fn.tmTree.parseOptions = function($target) {
+		$.fn.kimTree.parseOptions = function($target) {
 			return {
 				width: $target.attr("width"),
 				height: $target.attr("height")
 			};
 		};
 		
-		$.fn.tmTree.methods = {
+		$.fn.kimTree.methods = {
 			remove: function($this) {
 				$this.remove();
 			}
@@ -853,7 +853,7 @@
 			};
 		};
 		
-		$.fn.tmTree.defaults = {
+		$.fn.kimTree.defaults = {
 			root: [ {name: "主题框架1",url: "",opid: 1,pid: "root1",mark:"focus"}, 
 					{name: "主题框架2",url: "",opid: 2,pid: "root2"}, 
 					{name: "主题框架3",url: "",opid: 3,pid: "root3"}, 
@@ -919,7 +919,7 @@
 		};
 
 
-		$.tmTree = {
+		$.kimTree = {
 			_expand: function(pid, obj, e) {
 				tableTreeArr = [];
 				var $this = $(obj);
@@ -974,7 +974,7 @@
 				var n = 1;
 				for (var i = 0; i < root.length; i++,n++) {
 					var data = root[i];
-					var chhtml = "<img id=\"tm_items_expand_" + data.pid + "\"  class=\"tm-icon\" style=\"CURSOR: pointer;\"  onclick=\"$.tmTree._expand(" + data.pid + ",this,event);\" src=\"../../images/treetable/plus.gif\"><img style=\"position: relative;top:2px;\"  src=\"../../images/treetable/fshut.gif\">";
+					var chhtml = "<img id=\"tm_items_expand_" + data.pid + "\"  class=\"tm-icon\" style=\"CURSOR: pointer;\"  onclick=\"$.kimTree._expand(" + data.pid + ",this,event);\" src=\"../../images/treetable/plus.gif\"><img style=\"position: relative;top:2px;\"  src=\"../../images/treetable/fshut.gif\">";
 					if (isEmpty(children[data.pid])) {
 						//在子类中找不到就不显示收起和展开节点了。
 						chhtml = "<img class=\"tm_tree_leaf tm-icon \"  src=\"../../images/treetable/leaf.gif\">";
@@ -1002,7 +1002,7 @@
 						treeBlankCount++;
 						for (var i = 0; i < childrenArr.length; i++,n++) {
 							var data = childrenArr[i];
-							var chhtml = "<img id=\"tm_items_expand_" + data.pid + "\" style=\"CURSOR: pointer;\" class=\"tm-icon\" onclick=\"$.tmTree._expand(" + data.pid + ",this,event);\" src=\"../../images/treetable/plus.gif\"><img style=\"position: relative;top:2px;\" src=\"../../images/treetable/fshut.gif\">";
+							var chhtml = "<img id=\"tm_items_expand_" + data.pid + "\" style=\"CURSOR: pointer;\" class=\"tm-icon\" onclick=\"$.kimTree._expand(" + data.pid + ",this,event);\" src=\"../../images/treetable/plus.gif\"><img style=\"position: relative;top:2px;\" src=\"../../images/treetable/fshut.gif\">";
 							if (isEmpty(children[data.pid])) {
 								//在子类中找不到就不显示收起和展开节点了。
 								chhtml = "<img class=\"tm_tree_leaf tm-icon\"  src=\"../../images/treetable/leaf.gif\">";

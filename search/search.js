@@ -1,5 +1,4 @@
-(function($){
-
+;(function($){
 	var loadingCss = {
 		css: function(path){
 			var path = loadingCss.getParentPath() + path;
@@ -26,9 +25,9 @@
 	var search_inWidth;
 
 	//jquery方法
-	$.fn.mySearch = function(options){
+	$.fn.kimSearch = function(options){
 		return this.each(function() {
-			var opts = $.extend({},$.fn.mySearch.defaults,options);
+			var opts = $.extend({},$.fn.kimSearch.defaults,options);
 			searchInit($(this),opts);
 			search_inWidth = $(this).find("#search_in").width();
 			searchEvent($(this),opts);
@@ -59,24 +58,27 @@
 			searchHtml += searchList;
 		}
 		
-		$this.append(searchHtml);
-
+		$this.append(searchHtml).css({"position":"relative","background":"#fff"});
+		
 		$this.find(".search_me").css({fontSize:opts.searchFontSize+"px",color:opts.tipColor});
 		$this.find(".search_in").css({fontSize:opts.searchFontSize+"px"});
 		$this.find(".search_button").css({color:opts.listhovercl,background:opts.searchFocusCl,fontSize:opts.searchFontSize+"px"});
 		
-		if(opts.width!=0 && (opts.width).indexOf("%")==-1){$this.css({width:opts.width});}
-		if((opts.width).indexOf("%")!=-1){$this.css({width:$this.parent().width()});}
-		if((opts.height).indexOf("%")!=-1){
-			$this.css({height:$this.parent().height()});
-			$this.find("span").css({lineHeight:$this.parent().height()+"px"});
-			$this.find(".searchIcon").css({lineHeight:($this.parent().height()-2)+"px",fontSize:opts.searchIconFS + 6 +"px"}).addClass(opts.searchIcon);
-			$this.find(".inputclear").css({top:($this.parent().height() - opts.searchIconFS)/2 + "px",fontSize:opts.searchIconFS});
-			$this.find(".rightArrow").css({top:($this.parent().height() - opts.searchIconFS)/2 + "px",fontSize:opts.searchIconFS});
+		if(typeof (opts.width) == "string" && (opts.width).indexOf("%")!=-1){
+			$this.find("#search_box").css({width:$this.width()-4});
+		}else{
+			$this.find("#search_box").css({width:opts.width});
 		}
-		if(opts.height!=0 && (opts.height).indexOf("%")==-1){
+		if(typeof (opts.height) == "string" && (opts.height).indexOf("%")!=-1){
+			$this.find("#search_box").css({height:$this.height()-4});
+			$this.find("#search_list").css({top:$this.height() + (opts.searchBoxborderWidth*2-2),left:-1,width:$this.width()-(opts.searchBoxborderWidth*2-2)});
+			$this.find("span").css({lineHeight:$this.height()-4+"px"});
+			$this.find(".searchIcon").css({lineHeight:($this.height()-6)+"px",fontSize:opts.searchIconFS + 6 +"px"}).addClass(opts.searchIcon);
+			$this.find(".inputclear").css({top:($this.height()-4 - opts.searchIconFS)/2 + "px",fontSize:opts.searchIconFS});
+			$this.find(".rightArrow").css({top:($this.height()-4 - opts.searchIconFS)/2 + "px",fontSize:opts.searchIconFS});
+		}else{
 			$this.css({height:opts.height});
-			$this.find("#search_list").css({top:opts.height + (opts.searchBoxborderWidth*2+2),left:-"1px"});
+			$this.find("#search_list").css({top:opts.height + (opts.searchBoxborWidth*2),left:0,width:opts.width});
 			$this.find("span").css({lineHeight:opts.height+"px"});
 			$this.find(".searchIcon").css({lineHeight:(opts.height-2)+"px",fontSize:opts.searchIconFS + 6 +"px"}).addClass(opts.searchIcon);
 			$this.find(".inputclear").css({top:(opts.height - opts.searchIconFS)/2 + "px",fontSize:opts.searchIconFS});
@@ -90,8 +92,7 @@
 		}
 		if(opts.searchButtonWidth && opts.iconWidth){
 			$this.find(".search_main").css({width:100 - parseInt(opts.iconWidth) - parseInt(opts.searchButtonWidth) +"%"});
-		}
-		
+		}	
 
 		if(opts.searchBoxborder!=0){$this.find("#search_box").css({border:opts.searchBoxborder});}
 		
@@ -138,8 +139,8 @@
 		});
 
 		//触发下拉框的伸缩事件
-		$this.find("input").click(function(e){
-			stopPropagation(e);
+		$this.find(".search_main").click(function(e){
+			stopBubble(e);
 			$(this).parents("#searchBox").find("#search_list").toggle();
 		});
 
@@ -168,7 +169,7 @@
 		});
 
 		//隐藏下拉框
-		$("html").click(function(){
+		$(document).click(function(){
 			$("#searchBox").find("#search_list").hide();
 		});
 
@@ -198,6 +199,36 @@
 		}
 	}
 
+	//默认参数
+	$.fn.kimSearch.defaults = {
+		searchText: "搜 索",//搜索提示
+		maxlength: "50",//允许输入的最长个数
+		placeholder: "",//提示内容IE8不支持
+		placeholder1: "可选择下拉方式搜索",//提示内容所有浏览器都通用
+		width: 500,//搜索框的宽度
+		height: 32,//搜索框的高度
+		iconWidth: "8%",
+		searchButtonWidth: "12%",
+		hideArrow: false,//是否显示搜索三角形
+		searchFontSize: 14,//搜索字体
+		searchIcon: "fa-search",//搜索框的搜索图标
+		searchIconFS: 18,//搜索框的搜索图标的大小
+		searchBoxborder: "2px solid #0076e3",//下拉列表对象的边框
+		searchBoxborderWidth: 2,//下拉列表对象的边框
+		searchFocusCl: "#0076e3",//搜索框获取焦点的颜色
+		tipColor: "blue",
+		listContent: ["1111111","222222","3333333333"],//下拉列表的内容
+		listFontSize: 14,//列表字体
+		listborder: "2px solid #ccc",//下拉列表对象的边框
+		listBackground: "#ccc",//下拉列表对象的背景颜色
+		listcolor: "#333",//下拉列表对象的颜色
+		listhoverbg: "#0076e3",//下拉列表鼠标移入对象的背景颜色
+		listhovercl: "#fff",//下拉列表鼠标移入对象的颜色
+		allowEnter: true,//允许使用回车键触发搜索
+		onclick: function($obj,medata,indata){//点击搜索事件
+		
+		}
+	};
 	//空判断
 	function isEmpty(val) {
 		val = $.trim(val);
@@ -245,36 +276,4 @@
 		}
 		return false; 
 	}
-
-	//默认参数
-	$.fn.mySearch.defaults = {
-		searchText: "搜 索",//搜索提示
-		maxlength: "50",//允许输入的最长个数
-		placeholder: "",//提示内容IE8不支持
-		placeholder1: "输入代码搜索或点击选择其他方式搜索",//提示内容所有浏览器都通用
-		width: 500,//搜索框的宽度
-		height: 32,//搜索框的高度
-		iconWidth: "8%",
-		searchButtonWidth: "12%",
-		hideArrow: false,//是否显示搜索三角形
-		searchFontSize: 14,//搜索字体
-		searchIcon: "fa-search",//搜索框的搜索图标
-		searchIconFS: 18,//搜索框的搜索图标的大小
-		searchBoxborder: "2px solid #0076e3",//下拉列表对象的边框
-		searchBoxborderWidth: 2,//下拉列表对象的边框
-		searchFocusCl: "#0076e3",//搜索框获取焦点的颜色
-		tipColor: "blue",
-		listContent: ["1111111","222222","3333333333"],//下拉列表的内容
-		listFontSize: 14,//列表字体
-		listborder: "2px solid #ccc",//下拉列表对象的边框
-		listBackground: "#ccc",//下拉列表对象的背景颜色
-		listcolor: "#333",//下拉列表对象的颜色
-		listhoverbg: "#0076e3",//下拉列表鼠标移入对象的背景颜色
-		listhovercl: "#fff",//下拉列表鼠标移入对象的颜色
-		allowEnter: true,//允许使用回车键触发搜索
-		onclick: function($obj,medata,indata){//点击搜索事件
-		
-		}
-	};
-
 })(jQuery);
