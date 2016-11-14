@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="Generator" content="EditPlus®">
+		<meta name="Author" content="king">
+		<meta name="Keywords" content="">
+		<meta name="Description" content="">
+		<title>加载动画</title>
+	</head>
+	<style type="text/css">
+		*{padding:0;margin:0;}
+		body{family:"微软雅黑";font-size:12px;position:relative;}
+		a{text-decoration:none;}
+		ul,ol li{list-style:none;} 
+		
+		
+	</style>
+	<script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
+	<script type="text/javascript" src="loadingGif/loadingGif.js" charset="UTF-8"></script>
+	<body>
+		
+		<div id="loadingGifWrap" style="border:1px solid red;width:400px;height:500px;margin:100px auto;">
+			
+		</div>
+
+	  <script type="text/javascript">
+		$(function(){
+			//$("body").kimLoading();
+			$("#loadingGifWrap").kimLoading({
+				show:true,
+			});
+		});
+		
+		
+	  </script>
+	</body>
+</html>
