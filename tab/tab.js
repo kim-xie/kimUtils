@@ -41,13 +41,13 @@
 			var contentHtml = "";
 			var jdata = opts.tabDatas;
 			var length = jdata.length;
-
+			
 			if(opts.index==0 || opts.index>length)opts.index=0;//边界判断
 			for(var i=0;i<length;i++){
 				var classStyle = "display:none";
 				if(opts.index == i){
-					className="kimui-tabs-active kimui-state-active";
-					classStyle="";
+					className = "kimui-tabs-active kimui-state-active";
+					classStyle = "";
 				}
 				liHtml += "<li tab='tab-"+i+"' data-url='"+jdata[i].url+"' class='"+className+"'><a href='javascript:void(0)'>"+jdata[i].title+"</a></li>";
 				contentHtml += "<div id='tab-"+i+"' class='kimui-tabs-panel' style='"+classStyle+"'>"+jdata[i].content+"</div>";
@@ -66,6 +66,12 @@
 			//样式
 			if(opts.width)$tab.width(opts.width);
 			if(opts.height)$tab.height(opts.height);
+			if(opts.activeBackground){
+				$tab.find(".kimui-tabs-header .kimui-tabs-active.kimui-state-active").css("background",opts.activeBackground);
+			}
+			if(opts.activeColor){
+				$tab.find(".kimui-tabs-header .kimui-tabs-active.kimui-state-active a").css("color",opts.activeColor);
+			}
 			if(opts.center){
 				$tab.css({"position":"absolute","z-index":"1993"});
 				kimUtil.position($tab);
@@ -82,7 +88,9 @@
 			}
 			if(opts.titleBackground){
 				$tab.find(".kimui-tabs-header").css("background",opts.titleBackground);
-				$tab.css("border","2px solid "+opts.titleBackground);
+			}
+			if(opts.border){
+				$tab.css("border",opts.border);
 			}
 			
 			//点击阴影层触发弹窗关闭
@@ -125,10 +133,20 @@
 			
 			//切换标题
 			$tab.find(".kimui-tabs-nav > li").on(opts.event,function(){
-				
+				$tab.find(".kimui-tabs-header .kimui-tabs-active.kimui-state-active").css("background","");
+				$tab.find(".kimui-tabs-header .kimui-tabs-active.kimui-state-active a").removeAttr("style");
+
 				$(this).addClass("kimui-tabs-active kimui-state-active").siblings().removeClass("kimui-tabs-active kimui-state-active");
+				
+				if(opts.activeBackground){
+					$tab.find(".kimui-tabs-header .kimui-tabs-active.kimui-state-active").css("background",opts.activeBackground);
+				}
+				if(opts.activeColor){
+					$tab.find(".kimui-tabs-header .kimui-tabs-active.kimui-state-active a").css("color",opts.activeColor);
+				}
 				$tab.find(".kimui-tabs-panel").hide();
 				
+				//获取标题对应的内容
 				var tab = $(this).attr("tab");
 				var $content = $tab.find("#"+tab);
 				$tab.find(".kimui-tabs-content").height($tab.height() - 44);
@@ -138,10 +156,15 @@
 					$content.append("<iframe src='"+url+"' allowtransparency='true' style='background-color:transparent' frameborder='0' width='100%' height='100%'></iframe>");
 					$content.show();
 				}
-				
+				//返回当前点击的对象及对应的内容
 				if(opts.callback)opts.callback($(this),$content);
-				//当前元素解绑事件
+				
 			});
+
+			//是否触发默认打开的标签事件
+			if(isNotEmpty(opts.index) && opts.triggerEvent){
+				$tab.find(".kimui-tabs-nav > li:eq("+opts.index+")").trigger(opts.event);
+			}
 		}
 	};
 
@@ -150,14 +173,17 @@
 		height:300,//选项卡的高度
 		event:"click",//选项卡的事件类型
 		titleBackground:"#4684b2",//标题背景色
+		activeBackground:"#f8f8f8",//选中的标题背景颜色
 		activeColor:"red",//选中的标题颜色
 		contentBackground:"#fff",//内容背景色
 		center:true,//弹窗是否以屏幕居中
+		border:"2px solid #4684b2",//边框
 		showShade:true,//是否显示阴影曾
 		shadeClose:true,//是否可以点击阴影层触发关闭
 		maxmin:true,//是否可以最大最小化
 		closeBtn:true,//是否显示关闭按钮
 		index:0,//默认打开第几个tab
+		triggerEvent:true,//默认打开是否触发事件
 		callback:function($current,$content){
 			
 		},
@@ -201,5 +227,24 @@
 				$this.position($dom);	
 			});
 		}
+	}
+	//空判断
+	function isEmpty(val) {
+		val = $.trim(val);
+		if (val == null)
+			return true;
+		if (val == undefined || val == 'undefined')
+			return true;
+		if (val == "")
+			return true;
+		if (val.length == 0)
+			return true;
+		if (!/[^(^\s*)|(\s*$)]/.test(val))
+			return true;
+		return false;
+	}
+	//非空判断
+	function isNotEmpty(val) {
+		return !isEmpty(val);
 	}
 })(jQuery);

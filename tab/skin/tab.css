@@ -13,5 +13,5 @@ body{position:relative;}
 .kimui-tabs-header > .kimui-tabs-nav > li > a{color:#fff;font-size:14px;font-weight:600;}
 .kimui-tabs-content{padding:6px;}
 .kimui-tabs-panel{height:100%;}
-.kimui-tabs-header > .kimui-tabs-nav > li.kimui-tabs-active.kimui-state-active{background:#fff;}
-.kimui-tabs-header > .kimui-tabs-nav > li.kimui-tabs-active.kimui-state-active > a{color:red;}
+/* .kimui-tabs-header > .kimui-tabs-nav > li.kimui-tabs-active.kimui-state-active{background:#f8f8f8;}
+.kimui-tabs-header > .kimui-tabs-nav > li.kimui-tabs-active.kimui-state-active > a{color:red;} */
