@@ -31,6 +31,7 @@
 	};
 
 	$.fn.kimTab.methods = {
+
 		init : function($tab,opts){
 			$tab.addClass("kimui-tabs");
 			var headerDiv = $("<div class='kimui-tabs-header'></div>");
@@ -52,10 +53,12 @@
 				contentHtml += "<div id='tab-"+i+"' class='kimui-tabs-panel' style='"+classStyle+"'>"+jdata[i].content+"</div>";
 				className = "";
 			}
+
 			//面板标题
 			$ul.html(liHtml);
 			headerDiv.append($ul);
 			$tab.append(headerDiv);
+
 			//面板内容
 			contentDiv.append(contentHtml);
 			$tab.append(contentDiv);
@@ -99,7 +102,6 @@
 				});
 			}
 			
-			
 			//最大化最小化
 			if(opts.maxmin){
 				$tab.find(".kimui-tabs-header").append("<i class='fa fa-expand tabMax' aria-hidden='true'></i>");
@@ -126,7 +128,7 @@
 				
 				$(this).addClass("kimui-tabs-active kimui-state-active").siblings().removeClass("kimui-tabs-active kimui-state-active");
 				$tab.find(".kimui-tabs-panel").hide();
-
+				
 				var tab = $(this).attr("tab");
 				var $content = $tab.find("#"+tab);
 				$tab.find(".kimui-tabs-content").height($tab.height() - 44);
@@ -148,7 +150,7 @@
 		height:300,//选项卡的高度
 		event:"click",//选项卡的事件类型
 		titleBackground:"#4684b2",//标题背景色
-		activeColor:"#fff",//选中的标题颜色
+		activeColor:"red",//选中的标题颜色
 		contentBackground:"#fff",//内容背景色
 		center:true,//弹窗是否以屏幕居中
 		showShade:true,//是否显示阴影曾
