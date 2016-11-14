@@ -1,6 +1,5 @@
 /********************tab***************************/
 ;(function($){
-
 	var loadingCss = {
 		css: function(path){
 			var path = this.getParentPath() + path;
@@ -19,7 +18,7 @@
 			ParentPath = ParentPath[ParentPath.length-1].src.substring(0,ParentPath[ParentPath.length-1].src.lastIndexOf("/")+1);
 			return ParentPath;
 		}
-	}
+	};
 	loadingCss.css("skin/tab.css");
 
 	$.fn.kimTab = function(options){
@@ -31,7 +30,6 @@
 	};
 
 	$.fn.kimTab.methods = {
-
 		init : function($tab,opts){
 			$tab.addClass("kimui-tabs");
 			var headerDiv = $("<div class='kimui-tabs-header'></div>");
@@ -41,15 +39,17 @@
 			var contentHtml = "";
 			var jdata = opts.tabDatas;
 			var length = jdata.length;
-			
-			if(opts.index==0 || opts.index>length)opts.index=0;//边界判断
+			var className = "kimui-tabs-default";
+			if(opts.index == 0 || opts.index > length){
+				opts.index = 0;//边界判断
+			}
 			for(var i=0;i<length;i++){
 				var classStyle = "display:none";
 				if(opts.index == i){
 					className = "kimui-tabs-active kimui-state-active";
 					classStyle = "";
 				}
-				liHtml += "<li tab='tab-"+i+"' data-url='"+jdata[i].url+"' class='"+className+"'><a href='javascript:void(0)'>"+jdata[i].title+"</a></li>";
+				liHtml += "<li tab='tab-"+i+"' data-url='"+jdata[i].url+"' class='"+ className +"'><a href='javascript:void(0)'>"+jdata[i].title+"</a></li>";
 				contentHtml += "<div id='tab-"+i+"' class='kimui-tabs-panel' style='"+classStyle+"'>"+jdata[i].content+"</div>";
 				className = "";
 			}
@@ -67,10 +67,10 @@
 			if(opts.width)$tab.width(opts.width);
 			if(opts.height)$tab.height(opts.height);
 			if(opts.activeBackground){
-				$tab.find(".kimui-tabs-header .kimui-tabs-active.kimui-state-active").css("background",opts.activeBackground);
+				$tab.find(".kimui-tabs-active.kimui-state-active").css("background",opts.activeBackground);
 			}
 			if(opts.activeColor){
-				$tab.find(".kimui-tabs-header .kimui-tabs-active.kimui-state-active a").css("color",opts.activeColor);
+				$tab.find(".kimui-tabs-active.kimui-state-active a").css("color",opts.activeColor);
 			}
 			if(opts.center){
 				$tab.css({"position":"absolute","z-index":"1993"});
@@ -131,19 +131,40 @@
 				});
 			}
 			
+			$tab.find(".kimui-tabs-nav > li").hover(function(){
+				if(!$(this).hasClass("kimui-tabs-active kimui-state-active")){
+					$(this).find("a").css("color",opts.activeColor);
+				}
+			},function(){
+				if(!$(this).hasClass("kimui-tabs-active kimui-state-active")){
+					$(this).find("a").css("color","");
+				}
+			});
+			
 			//切换标题
 			$tab.find(".kimui-tabs-nav > li").on(opts.event,function(){
-				$tab.find(".kimui-tabs-header .kimui-tabs-active.kimui-state-active").css("background","");
-				$tab.find(".kimui-tabs-header .kimui-tabs-active.kimui-state-active a").removeAttr("style");
+				$tab.find(".kimui-tabs-active.kimui-state-active").css("background","");
+				$tab.find(".kimui-tabs-active.kimui-state-active a").removeAttr("style");
 
 				$(this).addClass("kimui-tabs-active kimui-state-active").siblings().removeClass("kimui-tabs-active kimui-state-active");
 				
 				if(opts.activeBackground){
-					$tab.find(".kimui-tabs-header .kimui-tabs-active.kimui-state-active").css("background",opts.activeBackground);
+					$tab.find(".kimui-tabs-active.kimui-state-active").css("background",opts.activeBackground);
 				}
 				if(opts.activeColor){
-					$tab.find(".kimui-tabs-header .kimui-tabs-active.kimui-state-active a").css("color",opts.activeColor);
+					$tab.find(".kimui-tabs-active.kimui-state-active a").css("color",opts.activeColor);
 				}
+				
+				$tab.find(".kimui-tabs-nav > li").hover(function(){
+					if(!$(this).hasClass("kimui-tabs-active kimui-state-active")){
+						$(this).find("a").css("color",opts.activeColor);
+					}
+				},function(){
+					if(!$(this).hasClass("kimui-tabs-active kimui-state-active")){
+						$(this).find("a").css("color","");
+					}
+				});
+				
 				$tab.find(".kimui-tabs-panel").hide();
 				
 				//获取标题对应的内容
