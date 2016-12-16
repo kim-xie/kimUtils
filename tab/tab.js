@@ -50,7 +50,7 @@
 					classStyle = "";
 				}
 				liHtml += "<li tab='tab-"+i+"' data-url='"+jdata[i].url+"' class='"+ className +"'><a href='javascript:void(0)'>"+jdata[i].title+"</a></li>";
-				contentHtml += "<div id='tab-"+i+"' class='kimui-tabs-panel' style='"+classStyle+"'>"+jdata[i].content+"</div>";
+				contentHtml += "<div id='tab-"+i+"' class='kimui-tabs-panel' style='"+classStyle+"'><span class='contents'>"+jdata[i].content+"</span></div>";
 				className = "";
 			}
 
@@ -64,8 +64,20 @@
 			$tab.append(contentDiv);
 			
 			//样式
-			if(opts.width)$tab.width(opts.width);
-			if(opts.height)$tab.height(opts.height);
+			if(opts.width){
+				$tab.width(opts.width);
+				$tab.find(".kimui-tabs-content").width($tab.width());
+			}else{
+				$tab.width(document.documentElement.clientWidth || document.body.clientWidth);
+				$tab.find(".kimui-tabs-content").width($tab.width());
+			}
+			if(opts.height){
+				$tab.height(opts.height);
+				$tab.find(".kimui-tabs-content").height($tab.height() - 44);
+			}else{
+				//$tab.height(document.documentElement.clientHeight || document.body.clientHeight);
+				//$tab.find(".kimui-tabs-content").height($tab.height() - 44);
+			}
 			if(opts.activeBackground){
 				$tab.find(".kimui-tabs-active.kimui-state-active").css("background",opts.activeBackground);
 			}
@@ -77,7 +89,8 @@
 				kimUtil.position($tab);
 				kimUtil.resize($tab);
 			}
-			$tab.find(".kimui-tabs-content").height($tab.height() - 44).css({"background":opts.contentBackground});
+			
+			$tab.find(".kimui-tabs-content").css({"background":opts.contentBackground});
 			$tab.find(".kimui-tabs-nav > li:first").css({"border-left":"none"});
 			if(opts.showShade){
 				$tab.parents("body").prepend("<div id='tabOverlay'></div>");
@@ -114,19 +127,24 @@
 			if(opts.maxmin){
 				$tab.find(".kimui-tabs-header").append("<i class='fa fa-expand tabMax' aria-hidden='true'></i>");
 				$tab.find(".kimui-tabs-header .tabMax").click(function(){
-					if($tab.height() < $(window).height()){
+					if($tab.height() !== $(window).height()){
 						$tab.height($(window).height());
 						$tab.width($(window).width());
 						kimUtil.position($tab);
 						kimUtil.resize($tab);
-						$tab.css({"margin":"3px 0 0 2px"});
+						//$tab.css({"margin":"3px 0 0 2px"});
 						$tab.find(".kimui-tabs-content").height($tab.height() - 44).css({"background":opts.contentBackground});
 					}else{
-						$tab.height(opts.height);
 						$tab.width(opts.width);
 						kimUtil.position($tab);
 						kimUtil.resize($tab);
-						$tab.find(".kimui-tabs-content").height($tab.height() - 44).css({"background":opts.contentBackground});
+						if(opts.height){
+							$tab.height(opts.height);
+							$tab.find(".kimui-tabs-content").height($tab.height() - 44).css({"background":opts.contentBackground});
+						}else{
+							$tab.height(document.documentElement.clientHeight || document.body.clientHeight);
+							$tab.find(".kimui-tabs-content").height($tab.height() - 44).css({"background":opts.contentBackground});
+						}
 					}
 				});
 			}
@@ -170,13 +188,30 @@
 				//获取标题对应的内容
 				var tab = $(this).attr("tab");
 				var $content = $tab.find("#"+tab);
-				$tab.find(".kimui-tabs-content").height($tab.height() - 44);
+				
+				if(opts.height){
+					$tab.height(opts.height);
+					$tab.find(".kimui-tabs-content").height($tab.height() - 44);
+				}else{
+					$tab.height(document.documentElement.clientHeight || document.body.clientHeight);
+					$tab.find(".kimui-tabs-content").height($tab.height() - 44);
+				}
+				if(opts.width){
+					$tab.width(opts.width);
+					$tab.find(".kimui-tabs-content").width($tab.width());
+				}else{
+					//$tab.width(document.documentElement.clientWidth || document.body.clientWidth);
+					//$tab.find(".kimui-tabs-content").width($tab.width());
+				}
+				//$tab.find(".kimui-tabs-content").height($tab.height() - 44);
 				var url = $(this).data("url");
 				if(url){
 					$content.empty();
-					$content.append("<iframe src='"+url+"' allowtransparency='true' style='background-color:transparent' frameborder='0' width='100%' height='100%'></iframe>");
-					$content.show();
+					$content.append("<iframe src='"+url+"' allowtransparency='true' id='myiframe' style='background-color:transparent' frameborder='0' width='100%' height='100%'></iframe>");
 				}
+
+				$content.show();
+				
 				//返回当前点击的对象及对应的内容
 				if(opts.callback)opts.callback($(this),$content);
 				
@@ -188,6 +223,12 @@
 			}
 		}
 	};
+
+	document.getElementById("myiframe").onload = function(){  
+		document.getElementById("myiframe").height = 0;  
+		document.getElementById("myiframe").height = document.getElementById("myiframe").contentWindow.document.body.scrollHeight;  
+		//document.getElementById("myiframe").parentNode.style.height = this.contentWindow.document.body.clientHeight+"px";
+	}  
 
 	$.fn.kimTab.defaults = {
 		width:500,//选项卡的宽度
