@@ -1,6 +1,6 @@
-(funcion(){
+//;(function(){
 
-	//Ö§³Ötrim()·½·¨
+	//Ö§ï¿½ï¿½trim()ï¿½ï¿½ï¿½ï¿½
 	if(!String.prototype.trim){
 		String.prototype.trim = function(){
 			return  this.replace(/(^\s*)|(\s*$)/g,"");  
@@ -11,7 +11,7 @@
 		return this.replace(new RegExp(str,"ig"),target);
 	};
 
-	//¿ÕÅÐ¶Ï
+	//ï¿½ï¿½ï¿½Ð¶ï¿½
 	function isEmpty(val) {
 		val = $.trim(val);
 		if (val == null)
@@ -26,52 +26,52 @@
 			return true;
 		return false;
 	}
-	//·Ç¿ÕÅÐ¶Ï
+	//ï¿½Ç¿ï¿½ï¿½Ð¶ï¿½
 	function isNotEmpty(val) {
 		return !isEmpty(val);
 	}
 
-	//×èÖ¹ÊÂ¼þÃ°ÅÝ
+	//ï¿½ï¿½Ö¹ï¿½Â¼ï¿½Ã°ï¿½ï¿½
 	function stopBubble(e) {
-		// Èç¹ûÌá¹©ÁËÊÂ¼þ¶ÔÏó£¬ÔòÕâÊÇÒ»¸ö·ÇIEä¯ÀÀÆ÷
-		e = e || window.event || arguments.callee.caller.arguments[0]; //¼æÈÝfirefox
+		// ï¿½ï¿½ï¿½ï¿½á¹©ï¿½ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½IEï¿½ï¿½ï¿½ï¿½ï¿½
+		e = e || window.event || arguments.callee.caller.arguments[0]; //ï¿½ï¿½ï¿½ï¿½firefox
 
 		if (e && e.stopPropagation){
-			// Òò´ËËüÖ§³ÖW3CµÄstopPropagation()·½·¨
+			// ï¿½ï¿½ï¿½ï¿½ï¿½Ö§ï¿½ï¿½W3Cï¿½ï¿½stopPropagation()ï¿½ï¿½ï¿½ï¿½
 			e.stopPropagation();
 		}else{
-			// ·ñÔò£¬ÎÒÃÇÐèÒªÊ¹ÓÃIEµÄ·½Ê½À´È¡ÏûÊÂ¼þÃ°ÅÝ
+			// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÒªÊ¹ï¿½ï¿½IEï¿½Ä·ï¿½Ê½ï¿½ï¿½È¡ï¿½ï¿½ï¿½Â¼ï¿½Ã°ï¿½ï¿½
 			window.event.cancelBubble = true;
 		}
 	};
 
-	//×èÖ¹ä¯ÀÀÆ÷µÄÄ¬ÈÏÐÐÎª 
+	//ï¿½ï¿½Ö¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¬ï¿½ï¿½ï¿½ï¿½Îª 
 	function stopDefault( e ) { 
-		// Èç¹ûÌá¹©ÁËÊÂ¼þ¶ÔÏó£¬ÔòÕâÊÇÒ»¸ö·ÇIEä¯ÀÀÆ÷
-		e = e || window.event || arguments.callee.caller.arguments[0]; //¼æÈÝfirefox
+		// ï¿½ï¿½ï¿½ï¿½á¹©ï¿½ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½IEï¿½ï¿½ï¿½ï¿½ï¿½
+		e = e || window.event || arguments.callee.caller.arguments[0]; //ï¿½ï¿½ï¿½ï¿½firefox
 		if(e && e.preventDefault){
-			//×èÖ¹Ä¬ÈÏä¯ÀÀÆ÷¶¯×÷(W3C) 
+			//ï¿½ï¿½Ö¹Ä¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(W3C) 
 			e.preventDefault(); 
 		}else{ 
-			//IEÖÐ×èÖ¹º¯ÊýÆ÷Ä¬ÈÏ¶¯×÷µÄ·½Ê½ 
+			//IEï¿½ï¿½ï¿½ï¿½Ö¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¬ï¿½Ï¶ï¿½ï¿½ï¿½ï¿½Ä·ï¿½Ê½ 
 			window.event.returnValue = false; 
 		}
 		return false; 
 	}
 
-	//·µ»ØÉÏÒ»²½²Ù×÷
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	function goback(){
 		window.history.back();
 	}
 
-	//JS»ñÈ¡×ÔÉíËùÔÚÎÄ¼þµÄÄ¿Â¼Â·¾¶
+	//JSï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½Ä¿Â¼Â·ï¿½ï¿½
 	function getParentPath(){
 		var ParentPath = document.scripts;
 		ParentPath = ParentPath[ParentPath.length-1].src.substring(0,ParentPath[ParentPath.length-1].src.lastIndexOf("/")+1);
 		return ParentPath;
 	}
 	
-	//js¶¯Ì¬¼ÓÔØjs¡¢cssÎÄ¼þ
+	//jsï¿½ï¿½Ì¬ï¿½ï¿½ï¿½ï¿½jsï¿½ï¿½cssï¿½Ä¼ï¿½
 	var dynamicLoading = {
 		css: function(path){
 			var path = this.getParentPath() + path;
@@ -103,23 +103,23 @@
 		}
 	}
 	
-	//Á½¸öÊý×é±È½Ï·µ»ØÊý×éµÄÔöÁ¿¼°É¾Á¿
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È½Ï·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É¾ï¿½ï¿½
 	function compareArray(arr1,arr2){
-		var temp = []; //ÁÙÊ±Êý×é1  
-		var temparrayRemoved = [];//ÁÙÊ±Êý×é2 - ¼ÇÂ¼±»É¾³ýµÄÔªËØ
-		var temparrayAdd = [];//ÁÙÊ±Êý×é3 - ¼ÇÂ¼ÐÂÔöµÄÔªËØ
+		var temp = []; //ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½1  
+		var temparrayRemoved = [];//ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½2 - ï¿½ï¿½Â¼ï¿½ï¿½É¾ï¿½ï¿½ï¿½Ôªï¿½ï¿½
+		var temparrayAdd = [];//ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½3 - ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ôªï¿½ï¿½
 
 		for (var i = 0; i < arr2.length; i++) {  
-			temp[arr2[i]] = true;//°ÑÊý×éBµÄÖµµ±³ÉÁÙÊ±Êý×é1µÄ¼ü²¢¸³ÖµÎªÕæ  
+			temp[arr2[i]] = true;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Bï¿½ï¿½Öµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½1ï¿½Ä¼ï¿½ÖµÎªï¿½ï¿½  
 		};  
 		for (var i = 0; i < arr1.length; i++) {  
 			if (!temp[arr1[i]]) {  
-				temparrayRemoved.push(arr1[i]); // »ñÈ¡É¾³ýµÄÔªËØ
+				temparrayRemoved.push(arr1[i]); // ï¿½ï¿½È¡É¾ï¿½ï¿½ï¿½Ôªï¿½ï¿½
 			} else {
-				delete temp[arr1[i]]; // É¾³ýÏàÍ¬µÄÔªËØ
+				delete temp[arr1[i]]; // É¾ï¿½ï¿½ï¿½ï¿½Í¬ï¿½ï¿½Ôªï¿½ï¿½
 			} ;  
 		};  
-		// ²éÕÒÌí¼ÓµÄÔªËØ
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Óµï¿½Ôªï¿½ï¿½
 		for(var i in temp){
 			temparrayAdd.push(i);
 		} 
@@ -130,9 +130,9 @@
 		return Arrjson;
 	}
 
-	//¶¨Î»¹¤¾ß
+	//ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½
 	var kimUtil = {
-		position : function($dom,amark){//¾ÓÖÐ¶¨Î»
+		position : function($dom,amark){//ï¿½ï¿½ï¿½Ð¶ï¿½Î»
 			var windowWidth = $(window).width();
 			var windowHeight= $(window).height();
 			var width = $dom.width();
@@ -146,7 +146,7 @@
 			return this;
 		},
 
-		positionParent : function($dom,$parent,atop){//Ïà¶Ô¸¸ÔªËØ¾ÓÖÐ¶¨Î»
+		positionParent : function($dom,$parent,atop){//ï¿½ï¿½Ô¸ï¿½Ôªï¿½Ø¾ï¿½ï¿½Ð¶ï¿½Î»
 			var parentWidth = $parent.width();
 			var parentHeight= $parent.height();
 			var width = $dom.width();
@@ -157,14 +157,14 @@
 			return this;
 		},
 
-		resize : function($dom){//´°ÌåÏìÓ¦Ê½
+		resize : function($dom){//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¦Ê½
 			var $this = this;
 			$(window).resize(function(){
 				$this.position($dom);	
 			});
 		},
 
-		animates:function($dom,mark,callback){//¶¯»­ÐèÒªÒýÈëanimate.css
+		animates:function($dom,mark,callback){//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½animate.css
 			switch(mark){
 				case "fadeOut":$dom.toggleClass(animateOut()).fadeOut("slow",function(){$(this).remove();if(callback)callback();});break;
 				case "slideUp":$dom.toggleClass(animateOut()).slideUp("slow",function(){$(this).remove();if(callback)callback();});break;
@@ -175,15 +175,15 @@
 			}
 		},
 
-		getRandomColor : function(){//»ñÈ¡Ê®Áù½øÖÆËæ»úÉ«
+		getRandomColor : function(){//ï¿½ï¿½È¡Ê®ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É«
 		  return '#'+Math.floor(Math.random()*16777215).toString(16);
 		}
 	};
 
-	//¼ÓÔØÑùÊ½
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê½
 	dynamicLoading.css("skin/kimUtils.css");
 
-	//ÒÆÈë¶¯»­ÈôindexÎª¿ÕÄ¬ÈÏÎªËæ»ú¶¯»­
+	//ï¿½ï¿½ï¿½ë¶¯ï¿½ï¿½ï¿½ï¿½indexÎªï¿½ï¿½Ä¬ï¿½ï¿½Îªï¿½ï¿½ï¿½
 	function animateIn(index){
 		var animateIn = [];
 		animateIn.push("animated bounce");//0
@@ -222,7 +222,7 @@
 		}
 	}
 
-	//ÒÆ³ý¶¯»­ÈôindexÎª¿ÕÄ¬ÈÏÎªËæ»ú¶¯»­
+	//ï¿½Æ³ï¿½ï¿½ï¿½indexÎªï¿½ï¿½Ä¬ï¿½ï¿½Îªï¿½ï¿½ï¿½
 	function animateOut(index){
 		var animateOut = [];
 		animateOut.push("animated flipOutX");//0
@@ -257,33 +257,33 @@
 	}
 
 	/**
-	 * ¶ÔDateµÄÀ©Õ¹£¬½« Date ×ª»¯ÎªÖ¸¶¨¸ñÊ½µÄString ÔÂ(M)¡¢ÈÕ(d)¡¢12Ð¡Ê±(h)¡¢24Ð¡Ê±(H)¡¢·Ö(m)¡¢Ãë(s)¡¢ÖÜ(E)¡¢¼¾¶È(q)
-	 * ¿ÉÒÔÓÃ 1-2 ¸öÕ¼Î»·û Äê(y)¿ÉÒÔÓÃ 1-4 ¸öÕ¼Î»·û£¬ºÁÃë(S)Ö»ÄÜÓÃ 1 ¸öÕ¼Î»·û(ÊÇ 1-3 Î»µÄÊý×Ö) 
+	 * ï¿½ï¿½Dateï¿½ï¿½ï¿½ï¿½Õ¹ï¿½ï¿½ï¿½ï¿½ Date ×ªï¿½ï¿½ÎªÖ¸ï¿½ï¿½ï¿½ï¿½Ê½ï¿½ï¿½String ï¿½ï¿½(M)ï¿½ï¿½ï¿½ï¿½(d)ï¿½ï¿½12Ð¡Ê±(h)ï¿½ï¿½24Ð¡Ê±(H)ï¿½ï¿½ï¿½ï¿½(m)ï¿½ï¿½ï¿½ï¿½(s)ï¿½ï¿½ï¿½ï¿½(E)ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(q)
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 1-2 ï¿½ï¿½Õ¼Î»ï¿½ï¿½ ï¿½ï¿½(y)ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 1-4 ï¿½ï¿½Õ¼Î»ï¿½ï¿½ï¿½ï¿½ï¿½(S)Ö»ï¿½ï¿½ï¿½ï¿½ 1 ï¿½ï¿½Õ¼Î»ï¿½ï¿½(ï¿½ï¿½ 1-3 Î»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½) 
 	 * eg: (new Date()).format("yyyy-MM-dd hh:mm:ss.S") ==> 2006-07-02 08:09:04.423 
-	 * eg: (new Date()).format("yyyy-MM-dd E HH:mm:ss") ==> 2009-03-10 ¶þ 20:09:04 
-	 * eg: (new Date()).format("yyyy-MM-dd EE hh:mm:ss") ==> 2009-03-10 ÖÜ¶þ 08:09:04 
-	 * eg: (new Date()).format("yyyy-MM-dd EEE hh:mm:ss") ==> 2009-03-10 ÐÇÆÚ¶þ 08:09:04 
+	 * eg: (new Date()).format("yyyy-MM-dd E HH:mm:ss") ==> 2009-03-10 ï¿½ï¿½ 20:09:04 
+	 * eg: (new Date()).format("yyyy-MM-dd EE hh:mm:ss") ==> 2009-03-10 ï¿½Ü¶ï¿½ 08:09:04 
+	 * eg: (new Date()).format("yyyy-MM-dd EEE hh:mm:ss") ==> 2009-03-10 ï¿½ï¿½ï¿½Ú¶ï¿½ 08:09:04 
 	 * eg: (new Date()).format("yyyy-M-d h:m:s.S") ==> 2006-7-2 8:9:4.18
 	 */
 	Date.prototype.format = function(fmt) {
 		var o = {
 			"Y+" : this.getFullYear(),
 			"M+" : this.getMonth() + 1,
-			// ÔÂ·Ý
+			// ï¿½Â·ï¿½
 			"d+" : this.getDate(),
-			// ÈÕ
+			// ï¿½ï¿½
 			"h+" : this.getHours() % 12 == 0 ? 12 : this.getHours() % 12,
 			// Ð¡Ê±
 			"H+" : this.getHours(),
 			// Ð¡Ê±
 			"m+" : this.getMinutes(),
-			// ·Ö
+			// ï¿½ï¿½
 			"s+" : this.getSeconds(),
-			// Ãë
+			// ï¿½ï¿½
 			"q+" : Math.floor((this.getMonth() + 3) / 3),
-			// ¼¾¶È
+			// ï¿½ï¿½ï¿½ï¿½
 			"S" : this.getMilliseconds()
-		// ºÁÃë
+		// ï¿½ï¿½ï¿½ï¿½
 		};
 		var week = {
 			"0" : "/u65e5",
@@ -309,14 +309,14 @@
 	};
 
 	/**
-	 * ½«Êý×Ö×ª»»³É¶ÔÓ¦µÄÖÐÎÄ ½«°¢À­²®Êý×Ö·­Òë³ÉÖÐÎÄµÄ´óÐ´Êý×Ö
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½ï¿½É¶ï¿½Ó¦ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÄµÄ´ï¿½Ð´ï¿½ï¿½ï¿½ï¿½
 	 * @param {Object}
-	 * num ±ÈÈç:1¶ÔÓ¦Ò» 11£ºÊ®Ò» 101:Ò»°ÙÁãÒ»
+	 * num ï¿½ï¿½ï¿½ï¿½:1ï¿½ï¿½Ó¦Ò» 11ï¿½ï¿½Ê®Ò» 101:Ò»ï¿½ï¿½ï¿½ï¿½Ò»
 	 * @return {TypeName}
 	 */
 	function NumberToChinese(num) {
-		var AA = new Array("Áã", "Ò»", "¶þ", "Èý", "ËÄ", "Îå", "Áù", "Æß", "°Ë", "¾Å", "Ê®");
-		var BB = new Array("", "Ê®", "°Ù", "Çª", "Èf", "ƒ|", "µã", "");
+		var AA = new Array("ï¿½ï¿½", "Ò»", "ï¿½ï¿½", "ï¿½ï¿½", "ï¿½ï¿½", "ï¿½ï¿½", "ï¿½ï¿½", "ï¿½ï¿½", "ï¿½ï¿½", "ï¿½ï¿½", "Ê®");
+		var BB = new Array("", "Ê®", "ï¿½ï¿½", "Çª", "ï¿½f", "ï¿½|", "ï¿½ï¿½", "");
 		var a = ("" + num).replace(/(^0*)/g, "").split("."),
 		k = 0,
 		re = "";
@@ -339,7 +339,7 @@
 			k++;
 		}
 
-		if (a.length > 1){ // ¼ÓÉÏÐ¡Êý²¿·Ö(Èç¹ûÓÐÐ¡Êý²¿·Ö)
+		if (a.length > 1){ // ï¿½ï¿½ï¿½ï¿½Ð¡ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½ï¿½Ð¡ï¿½ï¿½ï¿½)
 			re += BB[6];
 			for (var i = 0; i < a[1].length; i++) re += AA[a[1].charAt(i)];
 		}
@@ -350,7 +350,7 @@
 
 
 	/**
-	 * »ñÈ¡´°Ìå¿É¼û¶È¸ß¶È
+	 * ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½É¼ï¿½È¸ß¶ï¿½
 	 * @returns
 	 */
 	function getClientHeight() {
@@ -366,7 +366,7 @@
 	}
 
 	/**
-	 * »ñÈ¡´°Ìå¿É¼û¶È¿í¶È
+	 * ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½É¼ï¿½È¿ï¿½ï¿½
 	 * @returns
 	 */
 	function getClientWidth() {
@@ -380,12 +380,12 @@
 		}
 		return clientWidth;
 	}
-	//»ñÈ¡×î´ó¸ß¶È getClientHeight + ¹ö¶¯Ìõ¸ß¶È
+	//ï¿½ï¿½È¡ï¿½ï¿½ï¿½ß¶ï¿½ getClientHeight + ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß¶ï¿½
 	function getScrollHeight() {
 		return Math.max(getClientHeight(), document.body.scrollHeight,
 				document.documentElement.scrollHeight);
 	}
-	//¹ö¶¯Ìõ¾àÀë¶¥²¿µÄ¸ß¶È
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ë¶¥ï¿½ï¿½ï¿½Ä¸ß¶ï¿½
 	function getScrollTop() {
 		var scrollTop = 0;
 		if (document.documentElement && document.documentElement.scrollTop) {
@@ -396,7 +396,7 @@
 		return scrollTop;
 	}
 
-	/* ÎÄ¼þ´óÐ¡×ª»»ÎªMB GB KB¸ñÊ½ */
+	/* ï¿½Ä¼ï¿½ï¿½ï¿½Ð¡×ªï¿½ï¿½ÎªMB GB KBï¿½ï¿½Ê½ */
 	function countFileSize(size) {
 		var fsize = parseFloat(size, 2);
 		var fileSizeString;
@@ -414,14 +414,14 @@
 		return fileSizeString;
 	};
 
-	/* »ñÈ¡ÎÄ¼þºó×º */
+	/* ï¿½ï¿½È¡ï¿½Ä¼ï¿½ï¿½ï¿½×º */
 	function getExt(fileName) {
 		if (isNotEmpty(fileName) && fileName.lastIndexOf(".") == -1){return fileName;}
 		var pos = fileName.lastIndexOf(".") + 1;
 		return fileName.substring(pos, fileName.length).toLowerCase();
 	}
 
-	/* »ñÈ¡ÎÄ¼þÃû³Æ */
+	/* ï¿½ï¿½È¡ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ */
 	function getFileName(fileName) {
 		var pos = fileName.lastIndexOf("/") + 1;
 		if (pos == -1) {
@@ -431,53 +431,53 @@
 		}
 	}
 
-	//»ñÈ¡¼¸ÃëÖÓÒÔÇ° startTime==== Date
+	//ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç° startTime==== Date
 	function getTimeFormat(startTime) {
 		var startTimeMills = startTime.getTime();
 		var endTimeMills = new Date().getTime();
-		var diff = parseInt((endTimeMills - startTimeMills) / 1000);//Ãë
-		var day_diff = parseInt(Math.floor(diff / 86400));//Ìì
+		var diff = parseInt((endTimeMills - startTimeMills) / 1000);//ï¿½ï¿½
+		var day_diff = parseInt(Math.floor(diff / 86400));//ï¿½ï¿½
 		var buffer = Array();
 		if (day_diff < 0) {
-			return "[error],Ê±¼äÔ½½ç...";
+			return "[error],Ê±ï¿½ï¿½Ô½ï¿½ï¿½...";
 		} else {
 			if (day_diff == 0 && diff < 60) {
 				if (diff <= 0)
 					diff = 1;
-				buffer.push(diff + "ÃëÇ°");
+				buffer.push(diff + "ï¿½ï¿½Ç°");
 			} else if (day_diff == 0 && diff < 120) {
-				buffer.push("1 ·ÖÖÓÇ°");
+				buffer.push("1 ï¿½ï¿½ï¿½ï¿½Ç°");
 			} else if (day_diff == 0 && diff < 3600) {
-				buffer.push(Math.round(Math.floor(diff / 60)) + "·ÖÖÓÇ°");
+				buffer.push(Math.round(Math.floor(diff / 60)) + "ï¿½ï¿½ï¿½ï¿½Ç°");
 			} else if (day_diff == 0 && diff < 7200) {
 				buffer.push("1Ð¡Ê±Ç°");
 			} else if (day_diff == 0 && diff < 86400) {
 				buffer.push(Math.round(Math.floor(diff / 3600)) + "Ð¡Ê±Ç°");
 			} else if (day_diff == 1) {
-				buffer.push("1ÌìÇ°");
+				buffer.push("1ï¿½ï¿½Ç°");
 			} else if (day_diff < 7) {
-				buffer.push(day_diff + "ÌìÇ°");
+				buffer.push(day_diff + "ï¿½ï¿½Ç°");
 			} else if (day_diff < 30) {
-				buffer.push(Math.round(Math.floor(day_diff / 7)) + " ÐÇÆÚÇ°");
+				buffer.push(Math.round(Math.floor(day_diff / 7)) + " ï¿½ï¿½ï¿½ï¿½Ç°");
 			} else if (day_diff >= 30 && day_diff <= 179) {
-				buffer.push(Math.round(Math.floor(day_diff / 30)) + "ÔÂÇ°");
+				buffer.push(Math.round(Math.floor(day_diff / 30)) + "ï¿½ï¿½Ç°");
 			} else if (day_diff >= 180 && day_diff < 365) {
-				buffer.push("°ëÄêÇ°");
+				buffer.push("ï¿½ï¿½ï¿½ï¿½Ç°");
 			} else if (day_diff >= 365) {
-				buffer.push(Math.round(Math.floor(day_diff / 30 / 12)) + "ÄêÇ°");
+				buffer.push(Math.round(Math.floor(day_diff / 30 / 12)) + "ï¿½ï¿½Ç°");
 			}
 		}
 		return buffer.toString();
 	};
 
-	//Éí·ÝÖ¤ÅÐ¶Ï
+	//ï¿½ï¿½ï¿½Ö¤ï¿½Ð¶ï¿½
 	function isIdCard(val){
 		var idCard = /^[1-9]d{5}(19d{2}|[2-9]d{3})((0d)|(1[0-2]))(([0|1|2]d)|3[0-1])(d{4}|d{3}X)$/i;
 		if(idCard.test(val)){
 			return true;
 		}
 	} 
-	//ÓÊÏäÅÐ¶Ï
+	//ï¿½ï¿½ï¿½ï¿½ï¿½Ð¶ï¿½
 	function isEmail(val){
 		var email = /^\w+\@[A-Za-z0-9]+\.[A-Za-z]{2,4}$/i;
 		if(email.test(val)){
@@ -485,7 +485,7 @@
 		}
 	} 
 
-	//µç»°ÅÐ¶Ï
+	//ï¿½ç»°ï¿½Ð¶ï¿½
 	function isPhone(val){
 		var phone = /^1[3458]{1}[0-9]{9}$/;
 		if(phone.test(val)){
@@ -493,35 +493,35 @@
 		}
 	} 
 
-	//·¶Î§Ëæ»úÊý
+	//ï¿½ï¿½Î§ï¿½ï¿½ï¿½ï¿½ï¿½
 	function randomRange(start,end){
 		return Math.floor(Math.random()*(end-start+1))+start;
 	};
-	//Ëæ»úÊý
+	//ï¿½ï¿½ï¿½ï¿½ï¿½
 	function randomNum(num){
 		return Math.floor(Math.random()*(num+1));
 	};
-	//rgbËæ»úÉ«
+	//rgbï¿½ï¿½ï¿½É«
 	function randomColor(){
 		var r = Math.floor(Math.random()*256);
 		var g = Math.floor(Math.random()*256);
 		var b = Math.floor(Math.random()*256);
-		return "rgb("+r+","+g+","+b+")";//IE7²»Ö§³örgb
+		return "rgb("+r+","+g+","+b+")";//IE7ï¿½ï¿½Ö§ï¿½ï¿½rgb
 	};
-	//Ê®Áù½øÖÆËæ»úÉ«
+	//Ê®ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É«
 	function randomColor16(){
 		//0-255	
 		var r = Math.random(255).toString(16);
 		var g = Math.random(255).toString(16);
 		var b = Math.random(255).toString(16);
-		//255µÄÊý×Ö×ª»»³ÉÊ®Áù½øÖÆ
+		//255ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½Ê®ï¿½ï¿½ï¿½ï¿½ï¿½
 		if(r.length<2)r = "0"+r;
 		if(g.length<2)g = "0"+g;
 		if(b.length<2)b = "0"+b;
 		return "#"+r+g+b;
 	};
 
-	//»ñÈ¡¶ÔÏóÊý×éÏÂ±ê
+	//ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â±ï¿½
 	function getIndex(dom){
 		var index = -1;
 		var domArr = Array.prototype.slice.call(dom.parentElement.children);
@@ -534,12 +534,12 @@
 		return index;
 	};
 
-	//»ñÈ¡cssÖÐµÄÑùÊ½µÄÖµ£¬¸úä¯ÀÀÆ÷¼æÈÝÎÞ¹Ø
+	//ï¿½ï¿½È¡cssï¿½Ðµï¿½ï¿½ï¿½Ê½ï¿½ï¿½Öµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Þ¹ï¿½
 	function getStyle(dom,attr){
 		return window.getComputedStyle ? window.getComputedStyle(dom,false)[attr]:dom.currentStyle[attr];
 	};
 
-	//¼òµ¥»ìÈë--¶ÔÏó¼Ì³Ð
+	//ï¿½òµ¥»ï¿½ï¿½ï¿½--ï¿½ï¿½ï¿½ï¿½Ì³ï¿½
 	function mixin(obj,obj2){
 		for(var k in obj2){
 			if(obj2.hasOwnProperty(k)){
@@ -549,7 +549,7 @@
 		return obj;
 	};
 
-	//¶à¶ÔÏó»ìÈë
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	function mix(target,source){
 		var arr = [];
 		var args = arr.slice.call(arguments);
@@ -568,22 +568,22 @@
 		return target;
 	};
 
-	//»ñÈ¡Êó±êµÄÎ»ÖÃ¡£¼æÈÝie678
+	//ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½Î»ï¿½Ã¡ï¿½ï¿½ï¿½ï¿½ï¿½ie678
 	function getXY(e){
-		var ev = e || window.event || arguments.callee.caller.arguments[0]; //¼æÈÝfirefox
+		var ev = e || window.event || arguments.callee.caller.arguments[0]; //ï¿½ï¿½ï¿½ï¿½firefox
 		var x=0,y=0;
 		if(ev.pageX){
 			x = ev.pageX;
 			y = ev.pageY;
 		}else{
-			//ÄÃµ½scrollTop ºÍscrollLeft
+			//ï¿½Ãµï¿½scrollTop ï¿½ï¿½scrollLeft
 			var sleft = 0,stop = 0;
 			//ie678---
 			if(document.documentElement){
 				stop =document.documentElement.scrollTop;
 				sleft = document.documentElement.scrollLeft;
 			}else{
-			//ie9+ ¹È¸è 
+			//ie9+ ï¿½È¸ï¿½ 
 				stop = document.body.scrollTop;
 				sleft = document.body.scrollLeft;
 			}	
@@ -593,7 +593,7 @@
 		return {x:x,y:y};
 	};
 	
-	//¶ÔÏó×ª×Ö·û´®
+	//ï¿½ï¿½ï¿½ï¿½×ªï¿½Ö·ï¿½
 	function jsonToString(obj) {
 		var THIS = this;
 		switch (typeof (obj)) {
@@ -626,7 +626,7 @@
 		}
 	}
 
-	/* ½ûÖ¹´°ÌåÑ¡ÖÐ */
+	/* ï¿½ï¿½Ö¹ï¿½ï¿½ï¿½ï¿½Ñ¡ï¿½ï¿½ */
 	function forbiddenSelect() {
 		$(document).bind("selectstart", function() {
 			return false;
@@ -637,7 +637,7 @@
 		});
 	}
 
-	/* ´°ÌåÔÊÐíÑ¡ÖÐ */
+	/* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¡ï¿½ï¿½ */
 	function autoSelect() {
 		$(document).bind("selectstart", function() {
 			return true;
@@ -648,7 +648,7 @@
 		});
 	};
 	
-	//dom¶ÔÏó
+	//domï¿½ï¿½ï¿½ï¿½
 	function next(obj){
 		return obj.nextSibling.nodeType == 1 ? obj.nextSibling : next(obj.nextSibling);
 	};
@@ -665,7 +665,7 @@
 		return obj.lastChild.nodeType == 1 ? obj.lastChild : pre(obj.lastChild);
 	};
 
-	/*Í¨¹ýclassName»ñÈ¡domÔªËØ½øÐÐ¹ýÂË*/
+	/*Í¨ï¿½ï¿½classNameï¿½ï¿½È¡domÔªï¿½Ø½ï¿½ï¿½Ð¹ï¿½ï¿½ï¿½*/
 	function domClass(dompid,sClass){
 		var pdom = (typeof dompid==="string"?dom(dompid):dompid);
 		var aEle = pdom.getElementsByTagName('*');
@@ -678,7 +678,7 @@
 		return arrs;
 	};
 
-	//¼ÓÃÜ
+	//ï¿½ï¿½ï¿½ï¿½
 	function encryption(str,k){
 		var string = "";
 		for (var i = 0; i < str.length; i++) {
@@ -705,7 +705,7 @@
 		return string;
 	}
 
-	//½âÃÜ
+	//ï¿½ï¿½ï¿½ï¿½
 	function dencryption(str,n){
 		var string = "";
 		var k = parseInt("-"+n);
@@ -734,9 +734,9 @@
 	};
 
 	
-	/*ÈÕÆÚ¹¤¾ßÀà*/
+	/*ï¿½ï¿½ï¿½Ú¹ï¿½ï¿½ï¿½ï¿½ï¿½*/
 	$.tmDate = {
-	 /*×ª»»ÈÕÆÚ*/
+	 /*×ªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½*/
 	 _transferDate : function(date){
 		if(typeof date =="string"){
 			return new Date(date.replace(/-/ig,"/").replace("T"," "));
@@ -744,41 +744,41 @@
 			return date;
 		}
 	 },
-	  /*¸ñÊ½»¯ÈÕÆÚ*/
+	  /*ï¿½ï¿½Ê½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½*/
 	 _toString : function(date,pattern){
 		var d = this._transferDate(date);
 		return d.format(pattern);
 	 },
 
-	 /*»ñÈ¡Á½¸öÊ±¼äÏà¼õµÄÊ±¼ä*/
+	 /*ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½*/
 	 _Date : function(date1,date2){
 		var dateTime = this._numMillSecond(date1,date2);
 		return new Date(dateTime).format("yyyy-MM-dd");
 	 },
-	 //»ñÈ¡Á½¸öÊ±¼äÏà¼õµÄÄê·Ý
+	 //ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 _Datsyear : function(date1,date2){
 		 var dateTime = this._numYear(date1,date2);
 		 return  dateTime;
 	 },
-	//»ñÈ¡Á½¸öÊ±¼äÏà¼õµÄÔÂ·Ý
+	//ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â·ï¿½
 	 _datsmonth : function(date1,date2){
 		 var dateTime = this._numMonth(date2,date1);
 		 return  dateTime;
 	 },
 
-	 //¼ä¸ôÄê·Ý
+	 //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 _numYear : function(date1,date2){
 		var times = this._numDay(date1,date2);
 		return  Math.floor(times/365);
 	 },
 
-	  //¼ä¸ôÔÂ·Ý
+	  //ï¿½ï¿½ï¿½ï¿½Â·ï¿½
 	 _numMonth : function(date1,date2){
 		var times = this._numDay(date1,date2);
 		return  Math.floor(times/30);
 	 },
 
-	 //¼ä¸ôÌìÊý
+	 //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 _numDay : function(date1,date2){
 		var times = this._numSecond(date1,date2);
 		var hour = this._var().hour;
@@ -786,22 +786,22 @@
 		return Math.ceil(times/(mills * hour));
 	 },
 
-	//¼ä¸ôÊ±
+	//ï¿½ï¿½ï¿½Ê±
 	 _numHour : function(date1,date2){
 		return Math.floor(this._numMillSecond(date1,date2)/(1000*60*60));
 	 },
 
-	 //¼ä¸ô·Ö
+	 //ï¿½ï¿½ï¿½ï¿½ï¿½
 	 _numMinute : function(date1,date2){
 		return Math.floor(this._numMillSecond(date1,date2)/(1000*60));
 	 },
 
-	 //¼ä¸ôÃëÊý
+	 //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 _numSecond : function(date1,date2){
 		 return Math.floor(this._numMillSecond(date1,date2) / 1000);
 	 },
 
-	  //¼ä¸ôºÁÃë
+	  //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 _numMillSecond : function(date1,date2){
 		var stimes = this._getTime(this._transferDate(date1));
 		var etimes = this._getTime(this._transferDate(date2));
@@ -812,35 +812,35 @@
 		return {hour:24,second:60,mills:3600,format:"yyyy-MM-dd",dateFormat:"yyyy-MM-dd HH:mm:ss"};
 	 },
 
-	/*Ä³¸öÈÕÆÚ¼ÓÉÏ¶àÉÙºÁÃë*/
+	/*Ä³ï¿½ï¿½ï¿½ï¿½ï¿½Ú¼ï¿½ï¿½Ï¶ï¿½ï¿½Ùºï¿½ï¿½ï¿½*/
 	 _plusMillisSeconds : function(date,millisSeconds){
 		var dateTime = this._getTime(date);
 		var mintimes = millisSeconds;
 		var rdate = dateTime*1 + mintimes*1;
 		return this._format(new Date(rdate));
 	 },
-	 /*Ä³¸öÈÕÆÚ¼ÓÉÏ¶àÉÙÃë*/
+	 /*Ä³ï¿½ï¿½ï¿½ï¿½ï¿½Ú¼ï¿½ï¿½Ï¶ï¿½ï¿½ï¿½ï¿½ï¿½*/
 	 _plusSeconds : function(date,seconds){
 		var dateTime = this._getTime(date);
 		var mintimes = seconds*1000;
 		var rdate = dateTime*1 + mintimes*1;
 		return this._format(new Date(rdate));
 	 },
-	  /*Ä³¸öÈÕÆÚ¼ÓÉÏ¶àÉÙ·ÖÖÓ*/
+	  /*Ä³ï¿½ï¿½ï¿½ï¿½ï¿½Ú¼ï¿½ï¿½Ï¶ï¿½ï¿½Ù·ï¿½ï¿½ï¿½*/
 	 _plusMinutes : function(date,minutes){
 		var dateTime = this._getTime(date);
 		var mintimes = minutes*60*1000;
 		var rdate = dateTime*1 + mintimes*1;
 		return this._format(new Date(rdate));
 	 },
-	  /*Ä³¸öÈÕÆÚ¼ÓÉÏÐ¡Ê±Êý*/
+	  /*Ä³ï¿½ï¿½ï¿½ï¿½ï¿½Ú¼ï¿½ï¿½ï¿½Ð¡Ê±ï¿½ï¿½*/
 	 _plusHours : function(date,hours){
 		var dateTime = this._getTime(date);
 		var mintimes = hours*60*60*1000;
 		var rdate = dateTime + mintimes;
 		return this._format(new Date(rdate));
 	 },
-	 /*Ä³¸öÈÕÆÚ¼ÓÉÏÌìÊý*/
+	 /*Ä³ï¿½ï¿½ï¿½ï¿½ï¿½Ú¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½*/
 	 _plusDays : function(date,days){
 		var dateTime = this._getTime(date);
 		var mintimes = days*60*60*1000*24;
@@ -848,7 +848,7 @@
 		return this._format(new Date(rdate));
 	 },
 
-	 /*Ä³¸öÈÕÆÚ¼ÓÉÏ¶àÉÙ¸öÔÂ,ÕâÀïÊÇ°´ÕÕÒ»¸öÔÂ30ÌìÀ´¼ÆËãÌìÊýµÄ*/
+	 /*Ä³ï¿½ï¿½ï¿½ï¿½ï¿½Ú¼ï¿½ï¿½Ï¶ï¿½ï¿½Ù¸ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½ï¿½Ç°ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½30ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½*/
 	 _plusMonths : function(date,months){
 		var dateTime = this._getTime(date);
 		var mintimes = months*30*60*60*1000*24;
@@ -856,7 +856,7 @@
 		return this._format(new Date(rdate));
 	 },
 
-	 /*Ä³¸öÈÕÆÚ¼ÓÉÏ¶àÉÙ¸öÄê,ÕâÀïÊÇ°´ÕÕÒ»¸öÔÂ365ÌìÀ´¼ÆËãÌìÊýµÄ£¬Èç¹ûloopÎªtrueÔò°´ÈòÄê¼ÆËã*/
+	 /*Ä³ï¿½ï¿½ï¿½ï¿½ï¿½Ú¼ï¿½ï¿½Ï¶ï¿½ï¿½Ù¸ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½ï¿½Ç°ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½365ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä£ï¿½ï¿½ï¿½ï¿½loopÎªtrueï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½*/
 	 _plusYears : function(date,years,isLoop){
 		var dateTime = this._getTime(date);
 		var day = 365;
@@ -866,7 +866,7 @@
 		return this._format(new Date(rdate));
 	 },
 
-	 /*Ä³¸öÈÕÆÚ¼ÓÉÏÄ³¸öÈÕÆÚ£¬ÕâÑùµÄ²Ù×÷ÊÓºõÃ»Ê²Ã´ÒâÒå*/
+	 /*Ä³ï¿½ï¿½ï¿½ï¿½ï¿½Ú¼ï¿½ï¿½ï¿½Ä³ï¿½ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ï¿½ï¿½ï¿½ï¿½Ä²ï¿½ï¿½ï¿½ï¿½Óºï¿½Ã»Ê²Ã´ï¿½ï¿½ï¿½ï¿½*/
 	 _plusDate : function(date1,date2){
 		var dateTime = this._getTime(date1);
 		var dateTime2 = this._getTime(date2);;
@@ -874,35 +874,35 @@
 		return this._format(new Date(rdate));
 	 },
 
-	 /*Ä³¸öÈÕÆÚ¼õÈ¥¶àÉÙºÁÃëÃë*/
+	 /*Ä³ï¿½ï¿½ï¿½ï¿½ï¿½Ú¼ï¿½È¥ï¿½ï¿½ï¿½Ùºï¿½ï¿½ï¿½ï¿½ï¿½*/
 	 _minusMillisSeconds : function(date,millisSeconds){
 		var dateTime = this._getTime(date);
 		var mintimes = millisSeconds*1;
 		var rdate = dateTime - mintimes;
 		return this._format(new Date(rdate));
 	 },
-	 /*Ä³¸öÈÕÆÚ¼õÈ¥¶àÉÙÃë*/
+	 /*Ä³ï¿½ï¿½ï¿½ï¿½ï¿½Ú¼ï¿½È¥ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½*/
 	 _minusSeconds : function(date,seconds){
 		var dateTime = this._getTime(date);
 		var mintimes = seconds*1000;
 		var rdate = dateTime - mintimes;
 		return this._format(new Date(rdate));
 	 },
-	  /*Ä³¸öÈÕÆÚ¼õÈ¥¶àÉÙ·ÖÖÓ*/
+	  /*Ä³ï¿½ï¿½ï¿½ï¿½ï¿½Ú¼ï¿½È¥ï¿½ï¿½ï¿½Ù·ï¿½ï¿½ï¿½*/
 	 _minusMinutes : function(date,minutes){
 		var dateTime = this._getTime(date);
 		var mintimes = minutes*60*1000;
 		var rdate = dateTime - mintimes;
 		return this._format(new Date(rdate));
 	 },
-	  /*Ä³¸öÈÕÆÚ¼õÈ¥Ð¡Ê±Êý*/
+	  /*Ä³ï¿½ï¿½ï¿½ï¿½ï¿½Ú¼ï¿½È¥Ð¡Ê±ï¿½ï¿½*/
 	 _minusHours : function(date,hours){
 		var dateTime = this._getTime(date);
 		var mintimes = hours*60*60*1000;
 		var rdate = dateTime - mintimes;
 		return this._format(new Date(rdate));
 	 },
-	 /*Ä³¸öÈÕÆÚ¼õÈ¥ÌìÊý*/
+	 /*Ä³ï¿½ï¿½ï¿½ï¿½ï¿½Ú¼ï¿½È¥ï¿½ï¿½ï¿½ï¿½*/
 	 _minusDays : function(date,days){
 		var dateTime = this._getTime(date);
 		var mintimes = days*60*60*1000*24;
@@ -910,7 +910,7 @@
 		return this._format(new Date(rdate));
 	 },
 
-	 /*Ä³¸öÈÕÆÚ¼õÈ¥¶àÉÙ¸öÔÂ,ÕâÀïÊÇ°´ÕÕÒ»¸öÔÂ30ÌìÀ´¼ÆËãÌìÊýµÄ*/
+	 /*Ä³ï¿½ï¿½ï¿½ï¿½ï¿½Ú¼ï¿½È¥ï¿½ï¿½ï¿½Ù¸ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½ï¿½Ç°ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½30ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½*/
 	 _minusMonths : function(date,months){
 		var dateTime = this._getTime(date);
 		var mintimes = months*30*60*60*1000*24;
@@ -918,7 +918,7 @@
 		return this._format(new Date(rdate));
 	 },
 
-	 /*Ä³¸öÈÕÆÚ¼õÈ¥¶àÉÙ¸öÄê,ÕâÀïÊÇ°´ÕÕÒ»¸öÔÂ365ÌìÀ´¼ÆËãÌìÊýµÄ*/
+	 /*Ä³ï¿½ï¿½ï¿½ï¿½ï¿½Ú¼ï¿½È¥ï¿½ï¿½ï¿½Ù¸ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½ï¿½Ç°ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½365ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½*/
 	 _minusYears : function(date,years,isLoop){
 		var dateTime = this._getTime(date);
 		var day = 365;
@@ -928,7 +928,7 @@
 		return this._format(new Date(rdate));
 	 },
 
-	 /*Ä³¸öÈÕÆÚ¼õÈ¥Ä³¸öÈÕÆÚ£¬ÕâÑùµÄ²Ù×÷ÊÓºõÃ»Ê²Ã´ÒâÒå*/
+	 /*Ä³ï¿½ï¿½ï¿½ï¿½ï¿½Ú¼ï¿½È¥Ä³ï¿½ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ï¿½ï¿½ï¿½ï¿½Ä²ï¿½ï¿½ï¿½ï¿½Óºï¿½Ã»Ê²Ã´ï¿½ï¿½ï¿½ï¿½*/
 	 _minusDate : function(date1,date2){
 		var dateTime = this._getTime(date1);
 		var dateTime2 = this._getTime(date2);;
@@ -936,42 +936,42 @@
 		return this._format(new Date(rdate));
 	 },
 
-	 /*»ñÈ¡Ò»¸öÔÂÓÐ¶àÉÙÌì*/
+	 /*ï¿½ï¿½È¡Ò»ï¿½ï¿½ï¿½ï¿½ï¿½Ð¶ï¿½ï¿½ï¿½ï¿½ï¿½*/
 	 _getMonthOfDay :function(date1){
 		var currentMonth = this._getFirstDayOfMonth(date1);
 		var nextMonth = this._getNextDayOfMonth(date1);
 		return this._numDay(currentMonth,nextMonth);
 	 },
 
-	 /*»ñÈ¡Ò»ÄêÓÖ¶àÉÙÌì*/
+	 /*ï¿½ï¿½È¡Ò»ï¿½ï¿½ï¿½Ö¶ï¿½ï¿½ï¿½ï¿½ï¿½*/
 	 _getYearOfDay : function(date){
 		var firstDayYear = this._getFirstDayOfYear(date);
 		var lastDayYear = this._getLastDayOfYear(date);
 		return Math.ceil(this._numDay(firstDayYear,lastDayYear));
 	 },
 
-	 /*Ä³¸öÈÕÆÚÊÇµ±ÄêÖÐµÄµÚ¼¸Ìì*/
+	 /*Ä³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Çµï¿½ï¿½ï¿½ï¿½ÐµÄµÚ¼ï¿½ï¿½ï¿½*/
 	 _getDayOfYear : function(date1){
 		return Math.ceil(this._numDay(this._getFirstDayOfYear(date1),date1));	
 	 },
 
-	 /*Ä³¸öÈÕÆÚÊÇÔÚµ±ÔÂÖÐµÄµÚ¼¸Ìì*/
+	 /*Ä³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Úµï¿½ï¿½ï¿½ï¿½ÐµÄµÚ¼ï¿½ï¿½ï¿½*/
 	  _getDayOfMonth : function(date1){
 		return Math.ceil(this._numDay(this._getFirstDayOfMonth(date1),date1));	
 	 },
 
-	 /*»ñÈ¡Ä³¸öÈÕÆÚÔÚÕâÒ»ÄêµÄµÚ¼¸ÖÜ*/
+	 /*ï¿½ï¿½È¡Ä³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ÄµÚ¼ï¿½ï¿½ï¿½*/
 	 _getDayOfYearWeek : function(date){
 		var numdays = this._getDayOfYear(date);
 		return Math.ceil(numdays / 7);
 	 },
 
-	  /*Ä³¸öÈÕÆÚÊÇÔÚµ±ÔÂÖÐµÄÐÇÆÚ¼¸*/
+	  /*Ä³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Úµï¿½ï¿½ï¿½ï¿½Ðµï¿½ï¿½ï¿½ï¿½Ú¼ï¿½*/
 	  _getDayOfWeek : function(date1){
 		return this._getWeek(date1);
 	 },
 
-	 /*»ñÈ¡ÔÚµ±Ç°ÈÕÆÚÖÐµÄÊ±¼ä*/
+	 /*ï¿½ï¿½È¡ï¿½Úµï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½Ðµï¿½Ê±ï¿½ï¿½*/
 	 _getHourOfDay : function(date){
 		 return this._getHour(date);
 	 },
@@ -980,28 +980,28 @@
 		 var etime = this._getTime(this._transferDate(date2));
 		 return stime == etime ? true :false; 
 	 },
-	 /*Ä³¸öÈÕÆÚÊÇ·ñÍíÓÚÄ³¸öÈÕÆÚ*/
+	 /*Ä³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½Ä³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½*/
 	 _after : function(date1,date2){
 		 var stime = this._getTime(this._transferDate(date1));
 		 var etime = this._getTime(this._transferDate(date2));
 		 return  stime < etime ? true :false; 
 	 },
 
-	  /*Ä³¸öÈÕÆÚÊÇ·ñÔçÓÚÄ³¸öÈÕÆÚ*/
+	  /*Ä³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½Ä³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½*/
 	 _before : function(date1,date2){
 		 var stime = this._getTime(this._transferDate(date1));
 		 var etime = this._getTime(this._transferDate(date2));
 		 return  stime > etime ? true :false; 
 	 },
 	 
-	 /*»ñÈ¡Ä³ÄêµÄµÚÒ»Ìì*/
+	 /*ï¿½ï¿½È¡Ä³ï¿½ï¿½Äµï¿½Ò»ï¿½ï¿½*/
 	 _getFirstDayOfYear : function(date){
 		var year = this._getYear(date);
 		var dateString = year+"-01-01 00:00:00";
 		return dateString;
 	 },
 
-	  /*»ñÈ¡Ä³ÄêµÄ×îºóÒ»Ìì*/
+	  /*ï¿½ï¿½È¡Ä³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½*/
 	 _getLastDayOfYear : function(date){
 		var year = this._getYear(date);
 		var dateString = year+"-12-01 00:00:00";
@@ -1009,7 +1009,7 @@
 		return year+"-12-"+endDay+" 23:59:59";
 	 },
 
-	  /*»ñÈ¡Ä³ÔÂµÄµÚÒ»Ìì*/
+	  /*ï¿½ï¿½È¡Ä³ï¿½ÂµÄµï¿½Ò»ï¿½ï¿½*/
 	 _getFirstDayOfMonth: function(date){
 		var year = this._getYear(date);
 		var month = this._getMonth(date);
@@ -1017,14 +1017,14 @@
 		return dateString;
 	 },
 
-	 /*»ñÈ¡Ä³ÔÂ×îºóÒ»Ìì*/
+	 /*ï¿½ï¿½È¡Ä³ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½*/
 	 _getLastDayOfMonth : function(date){
 		var endDay = this._getMonthOfDay(date);
 		var year = this._getYear(date);
 		var month = this._getMonth(date);
 		return year +"-"+month+"-"+endDay+" 23:59:59";
 	 },
-	 /*Ò»ÌìµÄ¿ªÊ¼Ê±¼ä*/
+	 /*Ò»ï¿½ï¿½Ä¿ï¿½Ê¼Ê±ï¿½ï¿½*/
 	 _getFirstOfDay : function(date){
 		 var year = this._getYear(date);
 		 var month = this._getMonth(date);
@@ -1032,7 +1032,7 @@
 		 return year+"-"+month+"-"+day+" 00:00:00";
 	 },
 
-	 /*Ò»ÌìµÄ½áÊøÊ±¼ä*/
+	 /*Ò»ï¿½ï¿½Ä½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½*/
 	 _getLastOfDay : function(date){
 		 var year = this._getYear(date);
 		 var month = this._getMonth(date);
@@ -1040,7 +1040,7 @@
 		 return year+"-"+month+"-"+day+" 23:59:59";
 	 },
 	 
-	 /*»ñÈ¡ÏÂ¸öÔÂµÄµÚÒ»Ìì*/
+	 /*ï¿½ï¿½È¡ï¿½Â¸ï¿½ï¿½ÂµÄµï¿½Ò»ï¿½ï¿½*/
 	 _getNextDayOfMonth: function(date){
 		var year = this._getYear(date);
 		var month = this._getMonth(date);
@@ -1081,24 +1081,24 @@
 	 _getDate :function(){
 		 return this._getNow();
 	 },
-	 /*Äê*/
+	 /*ï¿½ï¿½*/
 	 _getYear:function(date){
 		 return this._transferDate(date).getFullYear();
 	 },
 
-	 /*ÔÂ*/
+	 /*ï¿½ï¿½*/
 	 _getMonth:function(date){
 		 var month = this._transferDate(date).getMonth()+1;
 		 return month>9 ? month : "0"+month;
 	 },
 
-	 /*ÈÕ*/
+	 /*ï¿½ï¿½*/
 	 _getDay:function(date){
 		 var day = this._transferDate(date).getDate();
 		 return day >9 ? day : "0"+day;
 	 },
 
-	  /*»ñÈ¡½ñÌìÐÇÆÚ¼¸,Èç¹ûÎª0´ú±íÐÇÆÚÈÕ*/
+	  /*ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú¼ï¿½,ï¿½ï¿½ï¿½Îª0ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½*/
 	 _getWeek : function(date){
 		 return this._transferDate(date).getDay();
 	 },
@@ -1109,73 +1109,73 @@
 		 return hour >9 ? hour : "0"+hour;
 	 },
 
-	 /*12Ð¡Ê±ÖÆÊ±*/
+	 /*12Ð¡Ê±ï¿½ï¿½Ê±*/
 	 _getHour12 : function(date){
 		 var hour = this._transferDate(date).getHours();
 		 return hour%12 == 0 ? 12 : hour % 12;
 	 },
 
-	 /*·Ö*/
+	 /*ï¿½ï¿½*/
 	 _getMinute : function(date){
 		 var minutes = this._transferDate(date).getMinutes();
 		 return minutes >9 ? minutes : "0"+minutes;
 	 },
 
-	 /*Ãë*/
+	 /*ï¿½ï¿½*/
 	 _getSecond : function(date){
 		var seconds = this._transferDate(date).getSeconds();
 		return seconds >9 ? seconds : "0"+seconds;
 	 },
 
-	 /*ºÁÃë*/
+	 /*ï¿½ï¿½ï¿½ï¿½*/
 	 _getMillisecond : function(date){
 		return this._transferDate(date).getMilliseconds();
 	 },
 
-	 /*»ñÈ¡½ñÌìÔÚµ±ÄêÊÇµÚ¼¸¼¾¶È*/
+	 /*ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½Úµï¿½ï¿½ï¿½ï¿½ÇµÚ¼ï¿½ï¿½ï¿½ï¿½ï¿½*/
 	 _getPeriod : function(date){
 		var month = this._getMonth(date)*1;
 		return  Math.floor((month+3)/3);
 	 },
 
-	 /*ÐÇÆÚ*/
+	 /*ï¿½ï¿½ï¿½ï¿½*/
 	 _nowWeekChinies : function(date){
 		var nowWeek = this._getWeek(date);
 		var day = "";
 		switch (nowWeek){
-			case 0:day="ÈÕ";break;
+			case 0:day="ï¿½ï¿½";break;
 			  break;
 			case 1:day="Ò»";break;
 			  break;
-			case 2:day="¶þ";break;
+			case 2:day="ï¿½ï¿½";break;
 			  break;
-			case 3:day="Èý";break;
+			case 3:day="ï¿½ï¿½";break;
 			  break;
-			case 4:day="ËÄ";break;
+			case 4:day="ï¿½ï¿½";break;
 			  break;
-			case 5:day="Îå";break;
+			case 5:day="ï¿½ï¿½";break;
 			  break;
-			case 6:day="Áù";break;
+			case 6:day="ï¿½ï¿½";break;
 		 }
 		 return day;
 	 },
 	 _getMessage : function(date){
 		 var now = date||new Date();
 		 var hour = now.getHours() ;
-		 if(hour < 6){return "Áè³¿ºÃ£¡";} 
-		 else if (hour < 9){return "ÔçÉÏºÃ£¡";} 
-		 else if (hour < 12){return "ÉÏÎçºÃ£¡";} 
-		 else if (hour < 14){return "ÖÐÎçºÃ£¡";} 
-		 else if (hour < 17){return "ÏÂÎçºÃ£¡";} 
-		 else if (hour < 19){return "°øÍíºÃ£¡";} 
-		 else if (hour < 22){return "ÍíÉÏºÃ£¡";} 
-		 else {return "Ò¹ÀïºÃ£¡";} 
+		 if(hour < 6){return "ï¿½è³¿ï¿½Ã£ï¿½";} 
+		 else if (hour < 9){return "ï¿½ï¿½ï¿½ÏºÃ£ï¿½";} 
+		 else if (hour < 12){return "ï¿½ï¿½ï¿½ï¿½Ã£ï¿½";} 
+		 else if (hour < 14){return "ï¿½ï¿½ï¿½ï¿½Ã£ï¿½";} 
+		 else if (hour < 17){return "ï¿½ï¿½ï¿½ï¿½Ã£ï¿½";} 
+		 else if (hour < 19){return "ï¿½ï¿½ï¿½ï¿½Ã£ï¿½";} 
+		 else if (hour < 22){return "ï¿½ï¿½ï¿½ÏºÃ£ï¿½";} 
+		 else {return "Ò¹ï¿½ï¿½Ã£ï¿½";} 
 	 },
-	 /*·µ»Ø 1970 Äê 1 ÔÂ 1 ÈÕÖÁ½ñµÄºÁÃëÊý¡£*/
+	 /*ï¿½ï¿½ï¿½ï¿½ 1970 ï¿½ï¿½ 1 ï¿½ï¿½ 1 ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Äºï¿½ï¿½ï¿½ï¿½ï¿½*/
 	 _getTime : function(date){
 		 return this._transferDate(date).getTime();
 	 }
 	};
 	/*date end*/
 
-})();
+//})();
