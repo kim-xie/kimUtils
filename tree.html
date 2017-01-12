@@ -1,0 +1,166 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="Generator" content="EditPlus®">
+		<meta name="Author" content="king">
+		<meta name="Keywords" content="">
+		<meta name="Description" content="">
+		<title>树形图</title>
+	</head>
+	<style type="text/css">
+		*{padding:0;margin:0;}
+		body{family:"微软雅黑";font-size:12px;}
+		a{text-decoration:none;}
+		ul,ol li{list-style:none;} 
+	</style>
+	<body>
+		
+		<div style="margin:100px auto;width:400px;">
+			<div id="comboBox1"></div>
+			<div class="comboBox"></div>
+		</div>
+		<div style="margin:300px auto;width:400px;">
+			<div id="comboBox2"></div>
+			<div class="comboBox"></div>
+		</div>
+		<script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
+		<script type="text/javascript" src="comboBox/comboBox.js"></script>
+		<script type="text/javascript" src="tree/tree.js"></script>
+		<!-- <script type="text/javascript" src="tree/tree.min.js"></script> -->
+		<!-- <script type="text/javascript" src="tree/tree.new.js"></script> -->
+		<script type="text/javascript">
+
+		var root = {
+			root:  [
+				{name : "框架1",url : "",opid : 1,pid : "root1",label : "limit"}, 
+				{name : "框架2",url : "",opid : 2,pid : "root2",label : "limit"}, 
+				{name : "框架3",url : "",opid : 3,pid : "root3",label : "limit"}
+			]
+		};
+
+		var children = {
+			
+			root1 : [ {name : "框架11-A1001",url : "javascript:void(0);",opid : 11,pid : "root11"}, 
+					  {name : "框架12-A1002",url : "javascript:void(0);",opid : 12,pid : "root12"}, 
+					  {name : "框架13-A1003",url : "javascript:void(0);",opid : 13,pid : "root13"},
+					  {name : "框架39-A3009",url : "javascript:void(0);",opid : 39,pid : "root39"}
+					],
+
+			root4 : [ {name : "框架41-A4001",url : "javascript:void(0);",opid : 41,pid : "root41"}, 
+					  {name : "框架42-A4002",url : "javascript:void(0);",opid : 42,pid : "root42"}, 
+					  {name : "框架43-A4003",url : "javascript:void(0);",opid : 43,pid : "root43"},
+					  {name : "框架49-A4009",url : "javascript:void(0);",opid : 49,pid : "root49"}
+					],
+
+			root5 : [ {name : "框架51-A5001",url : "javascript:void(0);",opid : 51,pid : "root51"}, 
+					  {name : "框架52-A5002",url : "javascript:void(0);",opid : 52,pid : "root52"}, 
+					  {name : "框架53-A5003",url : "javascript:void(0);",opid : 53,pid : "root53"}, 
+					  {name : "框架59-A5009",url : "javascript:void(0);",opid : 59,pid : "root59"}
+					],
+
+			root6 : [ {name : "框架61-A6001",url : "javascript:void(0);",opid : 61,pid : "root61"}, 
+					  {name : "框架62-A6002",url : "javascript:void(0);",opid : 62,pid : "root62"}, 
+					  {name : "框架69-A6009",url : "javascript:void(0);",opid : 69,pid : "root69"}
+					],
+
+			root7 : [ {name : "框架71-A7001",url : "javascript:void(0);",opid : 71,pid : "root71"}, 
+					  {name : "框架72-A7002",url : "javascript:void(0);",opid : 72,pid : "root72"}, 
+					  {name : "框架79-A7009",url : "javascript:void(0);",opid : 79,pid : "root79"}
+					],
+
+			root8 : [ {name : "框架81-A8001",url : "javascript:void(0);",opid : 81,pid : "root81"}, 
+					  {name : "框架82-A8002",url : "javascript:void(0);",opid : 82,pid : "root82"}, 
+					  {name : "框架83-A8003",url : "javascript:void(0);",opid : 83,pid : "root83"}, 
+					  {name : "框架18-A1008",url : "javascript:void(0);",opid : 18,pid : "root18"}, 
+					  {name : "框架11-A1001",url : "javascript:void(0);",opid : 11,pid : ""}
+					
+					],
+
+			
+			root11 : [ {name : "框架91-A9001",url : "javascript:void(0);",opid : 91,pid : "1"}, 
+					   {name : "框架97-A9007",url : "javascript:void(0);",opid : 97,pid : "root97"}, 
+					   {name : "框架98-A9008",url : "javascript:void(0);",opid : 98,pid : "root98"}, 
+					   {name : "框架99-A9009",url : "javascript:void(0);",opid : 99,pid : "root99"}
+					]
+			
+		}
+
+
+		
+
+		$(".comboBox1").kimComboBox({
+			width:"400px",//展示框的宽度
+			height:"28px",//展示框的高度
+			addIdsObj:"",//存放增量ID的Dom对象
+			removeIdsObj:"",//存放删除ID的Dom对象
+			idObj:"",//存放ID的Dom对象
+			idValue:"",//存放的ID值
+			textValue:"--请选择一个值--",//展示框的显示值
+			listId:"tree",//下拉框的ID属性
+			listClass:"trees",//下拉框的class属性
+			listWidth:"400px",//下拉框的宽度
+			listHeight:"300px",//下拉框的高度
+			listBackground:"#fff",//下拉框的背景色
+			listBorder:"1px solid #ddd",//下拉框的边框
+			listType:"tree",//下拉框的类型
+			listContent:["测试list下拉框1","测试list下拉框2","测试list下拉框3"],//下拉框里的值（针对下拉框为list类型的值）
+			showCheckBox:true,//是否显示复选框
+			isMultiSelect:true,//是否支持多选
+			tree:{//下拉框为树类型的树初始化
+				root: root.root,//根节点
+				children:children,//子节点
+				showSearch:true,//是否显示搜索框
+				type:"",//显示的类型
+				exclusion : false,//根节点同时点击是否互斥
+				expand : false,//是否显示展开和收起
+				expandCount :0,//展示第几个节点
+				showClose : false,//是否显示关闭
+				icons : false,//控制是否显示图标
+				iconFolder:false,//控制是否显示文件夹图标
+				iconFile:false,//控制是否显示文件图标
+				line : true,//控制是否显示线 
+				searchMethod: "js",//启用JS搜索 
+				isRadio: false,//单选
+				markParent: true,
+				width : 400,//宽度
+				height : 250,//高度
+				border : "1px solid #ddd",//给外边框加线
+				onclick : function($obj,data) {//触发点击事件以后回调返回的函数
+					//alert(JSON.stringify("父路径："+data.checkArr.name.trim() + "   选中的路径："+data.checkArr.name.trim()));
+					$(".contents").text(data.checkArr.name);	
+				}
+			}
+		});
+
+		$("#comboBox2").kimComboBox({
+			width:"100%",//展示框的宽度
+			height:"28px",//展示框的高度
+			addIdsObj:"",//存放增量ID的Dom对象
+			removeIdsObj:"",//存放删除ID的Dom对象
+			idObj:"combobox",//存放ID的Dom对象
+			idValue:"",//存放的ID值
+			textValue:"--请选择一个值--",//展示框的显示值
+			listId:"tree",//下拉框的ID属性
+			listClass:"trees",//下拉框的class属性
+			listWidth:"400px",//下拉框的宽度
+			listHeight:"300px",//下拉框的高度
+			listBackground:"#fff",//下拉框的背景色
+			listBorder:"1px solid #ddd",//下拉框的边框
+			showSearch:true,
+			searchBoxWidth:"390px",
+			listType:"list",//下拉框的类型
+			listContent:["测试list下拉框1","测试list下拉框2","测试list下拉框3"],//下拉框里的值（针对下拉框为list类型的值）
+			showCheckBox:false,//是否显示复选框
+			isMultiSelect:false,//是否支持多选
+			triggerClick:false,
+			onchange:function(obj,ids,values){
+				alert(values);
+			},//值变化事件
+			tree:{}
+		});
+
+
+	  </script>
+	</body>
+</html>
