@@ -20,9 +20,10 @@ ul li{padding-top:0px}
 a{color:#000;text-decoration:none}
 .cd{color:#ddd;}
 .cb{color:#0076e3;}
-.searchbox .searchwrap{display:inline-block;position:relative;width:100%;height:100%;border:1px solid #0076e3;}
+.searchbox{position:relative;z-index:1993;height:28px;line-height:28px;background:#fff;padding:5px;}
+.searchbox .searchwrap{display:inline-block;position:relative;background:#fff;width:100%;height:100%;border:1px solid #0076e3;}
 .searchbox .searchwrap .inputclear{display:none;position:absolute;right:16%;top:8px;z-index:3;cursor:pointer;}
-.searchbox .searchwrap input{width:85%;height:100%;line-height:28px;border:none;outline:none;text-indent:0.5em;}
+.searchbox .searchwrap input{width:85%;height:28px;outline:none;border:none;text-indent:0.5em;background:#fff;}
 .searchbox .searchwrap .searchbutton{width:15%;height: 100%;float:right;line-height:28px;text-align:center;background:#0076e3;color:#fff;cursor:pointer;font-weigth:600;}
 .tree div{display:block;overflow:hidden}
 .tree .toggle{cursor:pointer;}
@@ -30,7 +31,7 @@ a{color:#000;text-decoration:none}
 .tree .first_collapsable{background-position:0 -250px}
 .tree .expandable{background-position:0 -100px}
 .tree div div{background-position:0 -100px;border:medium none;display:block;float:left;height:22px;overflow:hidden;width:22px}
-.tree div div{background:url("tree.png") no-repeat scroll 0 0 transparent}  /* scroll 背景和内容绑定 */
+.tree div div{background:url("tree.png") no-repeat scroll 0 0 transparent}
 .tree div{display:block;overflow:hidden}
 .tree div,.tree a,.tree span{display:inherit;height:22px;line-height:22px}
 .tree .line{background-position:0 -400px}
@@ -59,7 +60,7 @@ a{color:#000;text-decoration:none}
 .tm_red{color:red}
 .tm_ccc{background:#ccc}
 
-#treeWrap{width:100%;height:100%;overflow:auto;}
+#treeWrap{position:relative;width:100%;height:100%;overflow:auto;}
 #treeWrap #searchRoot{left:0;top:0px;z-index:1000;width:100%;height:100%;background:#fff;display:none;/* overflow:hidden */}
 #treeWrap #searchRoot .tm-tree-checkbox,.tm-tree-checkbox-focus,.tm-tree-checkbox-checked{background:url("tm-tree.png") no-repeat scroll 0 0 transparent;cursor:pointer;}
 #treeWrap #searchRoot .tm-tree-checkbox{background-position:0 0px;width:13px;height:13px;margin:5px 3px}
@@ -76,3 +77,5 @@ a{color:#000;text-decoration:none}
 #treeWrap #searchRoot .searchList .tm-ui-tree-name{display:inline-block;float:right;width:252px;overflow:hidden;}
 #treeWrap #searchRoot .searchList .tm-ui-tree-name a{display:inline-block;width:100%;overflow:hidden;}
 
+#treeWrap #overlay{display:none;position:absolute;left:0;top:0px;z-index:1995;width:100%;height:100%;background:#fff;opacity:0.4;filter:alpha(opacity=40);}
+#treeWrap #overlay .imgBox{position:absolute;width:100px;height:100px;line-height:100px;text-align:center;}

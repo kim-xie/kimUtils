@@ -75,13 +75,14 @@
 			kimComboBox += "<div id='listBox'><div id='listRoot'><ul>";
 			var liDom = "";
 			for(var i=0;i<opts.listcontents.length;i++){
+				
 				if(opts.showCheckBox){
-					liDom += "<li><a href='javascript:void(0)' style='display:block;padding:0 5px;font-size:14px' data-id='"+opts.listids[i]+"'><input type='checkBox' style='display:inline-block;width:16px;height:16px;margin-right:5px;vertical-align:top;'>"+opts.listcontents[i]+"</a></li>";
+					liDom += "<li><a href='javascript:void(0)' style='display:block;padding:5px;font-size:14px' data-id='"+opts.listids[i]+"'><input type='checkBox' style='display:inline-block;width:16px;height:16px;margin-right:5px;vertical-align:top;'>"+opts.listcontents[i]+"</a></li>";
 				}else{
-					liDom += "<li><a href='javascript:void(0)' style='display:block;padding:0 5px;font-size:14px' data-id='"+opts.listids[i]+"'>"+opts.listcontents[i]+"</a></li>";
+					liDom += "<li><a href='javascript:void(0)' style='display:block;padding:5px;font-size:14px' data-id='"+opts.listids[i]+"'>"+opts.listcontents[i]+"</a></li>";
 				}
 			}
-			kimComboBox += liDom + "</ul></div><div id='searchRoot'><ul class='searchList'></ul></div></div>";
+			kimComboBox += liDom + "</ul></div><div id='searchRoot'><ul class='searchList'></ul></div><div id='overlay'><div class='imgBox'><img src='comboBox/skin/img/loading.gif' style='vertical-align:middle;margin-right:6px;'><span style='font-size:12px;'></span></div></div></div>";
 		}
 
 		kimComboBox += "</div></div>";
@@ -96,6 +97,7 @@
 		if(opts.height){
 			$this.find(".kimComboBox").height(opts.height);
 		}
+
 		if(opts.searchBoxWidth){
 			$this.find(".searchBox").width(opts.searchBoxWidth);
 		}
@@ -115,6 +117,8 @@
 		if(opts.listBorder){
 			$this.find("."+opts.listClass+"").css("border",opts.listBorder);
 		}
+		
+		$this.find("#overlay .imgBox").css({"left":($this.find(".kimComboBox").width() - 100)/2 +"px","top": ($this.find("#listBox").height() - 100)/2+"px"});
 	}
 
 	//初始化事件
@@ -174,6 +178,9 @@
 
 			if (opts.showSearch) {
                 $this.find(".searchbutton").click(function() {
+					setTimeout(function(){
+						$this.find("#overlay").show();
+					},0);
                     search($this);
                 });
                 $this.find(".search_in").focus(function() {
@@ -191,28 +198,37 @@
                     $(this).parent().find(".search_in").val("");
                     $this.scrollTop(0);
                     $(this).hide();
-                    $this.find("#searchRoot").hide();
-                    $this.find("#listRoot").show();
+                    setTimeout(function(){
+						$this.find("#overlay").show();
+					},0);
                     search($this);
                 });
                
                 $this.find(".search_in").keydown(function(e) {
                     var e = e || window.event || arguments.callee.caller.arguments[0];
                     if (e.keyCode == 13) {
+						setTimeout(function(){
+							$this.find("#overlay").show();
+						},0);
                         search($this);
                     }
                 });
-                //事件委托
-                $this.find("#searchRoot").bind("click",function(e){
-                	e = e || window.event || arguments.callee.caller.arguments[0];
-                	var target = e.target || e.srcElement;
-                	if(target.nodeName.toLowerCase() == "a"){
-                		var opid = target.getAttribute("data-id");
-						$(this).find("input:checkbox").trigger("click");
-                		$this.find("#listRoot li a[data-id="+opid+"]").trigger("click");
-                		search($this);
-            		}
-                });
+				if(opts.triggerClick){
+					//事件委托
+					$this.find("#searchRoot").bind("click",function(e){
+						e = e || window.event || arguments.callee.caller.arguments[0];
+						var target = e.target || e.srcElement;
+						
+						if(target.nodeName.toLowerCase() === "a"){
+							var opid = target.getAttribute("data-id");
+							$this.find("#listRoot li a[data-id="+opid+"]").trigger("click");
+							//$(this).find("input:checkbox").trigger("click");
+							search($this);
+						}else if(target.nodeName.toLowerCase() === "input"){
+							
+						}
+					});
+				}
             }
 			
 			if(opts.triggerClick){
@@ -266,34 +282,39 @@
 	}
 
 	function search(obj) {
-		var searchVal = $(obj).find(".search_in").val().trim();
-		var list = $(obj).find("#listRoot ul li");
-		
-		if (isNotEmpty(searchVal)) {
-			var searchLiDom = "";
-			list.each(function(i) {
-				var listVal = $(this).find("a").text();
-				if (listVal.toLowerCase().indexOf(searchVal.toLowerCase()) != -1) {
-					var checkMark = $(this).find("a input").prop("checked");
-					searchLiDom += "<li class='"+checkMark+"'>"+$(this).html()+"</li>";
-				}
-			});
-			$(obj).find("#listRoot").hide();
-			$(obj).find("#searchRoot").show();
-			$(obj).find("#searchRoot .searchList").html("").append(searchLiDom);
-
-			if($(obj).find("#searchRoot .searchList li").attr("class")=="true"){
-				$(obj).find("#searchRoot .searchList li a input[type='checkbox']").trigger("click");
-			}
-
-			if (list.text().toLowerCase().indexOf(searchVal.toLowerCase()) == -1) {
-				$(obj).find(".inputclear").removeClass("cd").removeClass("cb").addClass("tm_red");
-			} else {
-				$(obj).find(".inputclear").removeClass("cd").removeClass("tm_red").addClass("cb");
-			}	
-		} else {
+		setTimeout(function(){
+			var searchVal = $(obj).find(".search_in").val().trim();
+			var list = $(obj).find("#listRoot ul li");
 			
-		}
+			if (isNotEmpty(searchVal)) {
+				var searchLiDom = "";
+				$(obj).find("#overlay").show();
+				list.each(function(i) {
+					var listVal = $(this).find("a").text();
+					if (listVal.toLowerCase().indexOf(searchVal.toLowerCase()) != -1) {
+						var checkMark = $(this).find("a input").prop("checked");
+						searchLiDom += "<li class='"+checkMark+"'>"+$(this).html()+"</li>";
+					}
+				});
+				$(obj).find("#listRoot").hide();
+				$(obj).find("#searchRoot").show();
+				$(obj).find("#searchRoot .searchList").html("").append(searchLiDom);
+				
+				if($(obj).find("#searchRoot .searchList li").attr("class")=="true"){
+					$(obj).find("#searchRoot .searchList li a input[type='checkbox']").trigger("click");
+				}
+
+				if (list.text().toLowerCase().indexOf(searchVal.toLowerCase()) == -1) {
+					$(obj).find(".inputclear").removeClass("cd").removeClass("cb").addClass("tm_red");
+				} else {
+					$(obj).find(".inputclear").removeClass("cd").removeClass("tm_red").addClass("cb");
+				}	
+			} else {
+				$(obj).find("#listRoot").show();
+				$(obj).find("#searchRoot").hide();
+			}
+			$(obj).find("#overlay").hide();
+		},1000);
 	}
 
 	//默认参数
