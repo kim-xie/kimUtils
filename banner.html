@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="Generator" content="EditPlus®">
+		<meta name="Author" content="king">
+		<meta name="Keywords" content="">
+		<meta name="Description" content="">
+		<title>banner</title>
+	</head>
+	<style type="text/css">
+		*{padding:0;margin:0;}
+		body{family:"微软雅黑";font-size:12px;}
+		a{text-decoration:none;}
+		ul,ol li{list-style:none;}
+	</style>
+	<body>
+
+		<div id="bannerWrap" style="margin:100px auto;width:800px;height:300px;"></div>
+
+		<script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
+		<script type="text/javascript" src="banner/banner.js"></script>
+		<script type="text/javascript">
+			$("#bannerWrap").kimBanner({
+				imgSrc: ["img/1.jpg","img/2.jpg","img/3.jpg","img/4.jpg","img/5.jpg"],
+				imgUrl: ["javascript:void(0)","javascript:void(0)","javascript:void(0)","javascript:void(0)","javascript:void(0)"],//点击图片要跳转到的地址链接【数组格式】
+				imgTitle: ["第一张图片","第二张图片","第三张图片","第四张图片","第五张图片"]//图片title【数组格式】
+			});
+
+	  </script>
+	</body>
+</html>
