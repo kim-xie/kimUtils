@@ -45,29 +45,35 @@
 			}
 
 			var bannerTemp = "<div id='banner'>"+
-											"			<ul class='bannerList'>"+imgList+"</ul>"+
-											"			<ol class='num'>"+numList+"</ol>"+
-											"			<span class='prev'>&lt;</span>"+
-											"			<span class='next'>&gt;</span>"+
-											"</div>";
+											 "			<ul class='bannerList'>"+imgList+"</ul>"+
+											 "			<ol class='num'>"+numList+"</ol>"+
+											 "			<span class='prev'>&lt;</span>"+
+											 "			<span class='next'>&gt;</span>"+
+											 "</div>";
 
 		 $this.append(bannerTemp);
 
-		 $("ol.num li:first-child").addClass("on");
+		 $this.find("#banner").width($this.width()).height($this.height());
+		 if(opts.border){
+			 $this.find("#banner").css("border",opts.border);
+		 }
+		 var olDom = $this.find("#banner ol.num");
+		 var liDom = $this.find("#banner ol.num li");
+		 var liLen = liDom.size();
+		 liDom.first().addClass("on");
+		 olDom.width(12*(liLen-1) + (liLen+1)*15 + 30);
+		 olDom.css("left",($this.width() - olDom.width())/2 + "px");
 
 		}
-
 	};
 
 	//初始化事件
 	function bannerEvent($this,opts){
 		/*jquery-实现淘宝无缝banner切换*/
-		var imgWidth = $("#banner ul li img").width();
-		var $litab = $("#banner ol li");
-		var $bannerUl = $("#banner ul");
-		var $index = 0;
-		var nowTime = 0;
-		var timer = null;
+		var imgWidth = $this.find("#banner ul li img").width(),
+		$litab = $this.find("#banner ol li"),
+		$bannerUl = $this.find("#banner ul"),
+		$index = 0,nowTime = 0,timer = null;
 
 		//点击切换按钮
 		$litab.click(function(){
@@ -77,7 +83,7 @@
 		});
 
 		//点击下一张
-		$("#banner .next").click(function(){
+		$this.find("#banner .next").click(function(){
 			if(new Date()- nowTime > 600){
 				nowTime = new Date();
 				autoPlay();
@@ -85,7 +91,7 @@
 		}).mousedown(function(){return false;});
 
 		//点击上一张
-		$("#banner .prev").click(function(){
+		$this.find("#banner .prev").click(function(){
 			if(new Date()- nowTime > 600){
 				nowTime = new Date();
 				$index--;
@@ -114,21 +120,21 @@
 			$litab.eq($liIndex).addClass("on").siblings().removeClass("on");
 			$bannerUl.stop(true,true).animate({
 				"left":-($index+1)*imgWidth},500,function(){
-				if($index == $litab.length){
-					$bannerUl.css("left",-imgWidth);
-					$index = 0;
-				}
+						if($index == $litab.length){
+							$bannerUl.css("left",-imgWidth);
+							$index = 0;
+						}
 			});
 		};
 
 		//启动定时器
 		timer = setInterval(autoPlay,2000);
 		//鼠标进入清除定时
-		$("#banner").mouseover(function(){
+		$this.find("#banner").mouseover(function(){
 			clearInterval(timer);
 		});
 		//鼠标移出继续定时
-		$("#banner").mouseout(function(){
+		$this.find("#banner").mouseout(function(){
 			clearInterval(timer);
 			timer = setInterval(autoPlay,2000);
 		});
@@ -139,7 +145,8 @@
 	$.fn.kimBanner.defaults = {
 		imgSrc: [],//图片地址链接【数组格式】
 		imgUrl: [],//点击图片要跳转到的地址链接【数组格式】
-		imgTitle: []//图片title【数组格式】
+		imgTitle: [],//图片title【数组格式】
+		border: "",//图片边框
 	};
 
 	//阻止事件冒泡
