@@ -1,9 +1,12 @@
-//;(function(){
+//var jQuery = require('./js/jquery-1.11.2.min.js');
+//;(function($){
+
+	//require('./skin/kimUtils.css');
 
 	//֧��trim()����
 	if(!String.prototype.trim){
 		String.prototype.trim = function(){
-			return  this.replace(/(^\s*)|(\s*$)/g,"");  
+			return  this.replace(/(^\s*)|(\s*$)/g,"");
 		};
 	};
 	//replaceAll(newStr,oldStr)
@@ -45,18 +48,18 @@
 		}
 	};
 
-	//��ֹ�������Ĭ����Ϊ 
-	function stopDefault( e ) { 
+	//��ֹ�������Ĭ����Ϊ
+	function stopDefault( e ) {
 		// ����ṩ���¼�����������һ����IE�����
 		e = e || window.event || arguments.callee.caller.arguments[0]; //����firefox
 		if(e && e.preventDefault){
-			//��ֹĬ�����������(W3C) 
-			e.preventDefault(); 
-		}else{ 
-			//IE����ֹ������Ĭ�϶����ķ�ʽ 
-			window.event.returnValue = false; 
+			//��ֹĬ�����������(W3C)
+			e.preventDefault();
+		}else{
+			//IE����ֹ������Ĭ�϶����ķ�ʽ
+			window.event.returnValue = false;
 		}
-		return false; 
+		return false;
 	}
 
 	//������һ������
@@ -70,7 +73,7 @@
 		ParentPath = ParentPath[ParentPath.length-1].src.substring(0,ParentPath[ParentPath.length-1].src.lastIndexOf("/")+1);
 		return ParentPath;
 	}
-	
+
 	//js��̬����js��css�ļ�
 	var dynamicLoading = {
 		css: function(path){
@@ -102,27 +105,27 @@
 			return ParentPath;
 		}
 	}
-	
+
 	//��������ȽϷ��������������ɾ��
 	function compareArray(arr1,arr2){
-		var temp = []; //��ʱ����1  
+		var temp = []; //��ʱ����1
 		var temparrayRemoved = [];//��ʱ����2 - ��¼��ɾ���Ԫ��
 		var temparrayAdd = [];//��ʱ����3 - ��¼������Ԫ��
 
-		for (var i = 0; i < arr2.length; i++) {  
-			temp[arr2[i]] = true;//������B��ֵ������ʱ����1�ļ�ֵΪ��  
-		};  
-		for (var i = 0; i < arr1.length; i++) {  
-			if (!temp[arr1[i]]) {  
+		for (var i = 0; i < arr2.length; i++) {
+			temp[arr2[i]] = true;//������B��ֵ������ʱ����1�ļ�ֵΪ��
+		};
+		for (var i = 0; i < arr1.length; i++) {
+			if (!temp[arr1[i]]) {
 				temparrayRemoved.push(arr1[i]); // ��ȡɾ���Ԫ��
 			} else {
 				delete temp[arr1[i]]; // ɾ����ͬ��Ԫ��
-			} ;  
-		};  
+			} ;
+		};
 		// ������ӵ�Ԫ��
 		for(var i in temp){
 			temparrayAdd.push(i);
-		} 
+		}
 		var Arrjson = {
 			addArr:temparrayAdd,
 			removedArr:temparrayRemoved
@@ -160,7 +163,7 @@
 		resize : function($dom){//������Ӧʽ
 			var $this = this;
 			$(window).resize(function(){
-				$this.position($dom);	
+				$this.position($dom);
 			});
 		},
 
@@ -258,11 +261,11 @@
 
 	/**
 	 * ��Date����չ���� Date ת��Ϊָ����ʽ��String ��(M)����(d)��12Сʱ(h)��24Сʱ(H)����(m)����(s)����(E)������(q)
-	 * ������ 1-2 ��ռλ�� ��(y)������ 1-4 ��ռλ�����(S)ֻ���� 1 ��ռλ��(�� 1-3 λ������) 
-	 * eg: (new Date()).format("yyyy-MM-dd hh:mm:ss.S") ==> 2006-07-02 08:09:04.423 
-	 * eg: (new Date()).format("yyyy-MM-dd E HH:mm:ss") ==> 2009-03-10 �� 20:09:04 
-	 * eg: (new Date()).format("yyyy-MM-dd EE hh:mm:ss") ==> 2009-03-10 �ܶ� 08:09:04 
-	 * eg: (new Date()).format("yyyy-MM-dd EEE hh:mm:ss") ==> 2009-03-10 ���ڶ� 08:09:04 
+	 * ������ 1-2 ��ռλ�� ��(y)������ 1-4 ��ռλ�����(S)ֻ���� 1 ��ռλ��(�� 1-3 λ������)
+	 * eg: (new Date()).format("yyyy-MM-dd hh:mm:ss.S") ==> 2006-07-02 08:09:04.423
+	 * eg: (new Date()).format("yyyy-MM-dd E HH:mm:ss") ==> 2009-03-10 �� 20:09:04
+	 * eg: (new Date()).format("yyyy-MM-dd EE hh:mm:ss") ==> 2009-03-10 �ܶ� 08:09:04
+	 * eg: (new Date()).format("yyyy-MM-dd EEE hh:mm:ss") ==> 2009-03-10 ���ڶ� 08:09:04
 	 * eg: (new Date()).format("yyyy-M-d h:m:s.S") ==> 2006-7-2 8:9:4.18
 	 */
 	Date.prototype.format = function(fmt) {
@@ -476,14 +479,14 @@
 		if(idCard.test(val)){
 			return true;
 		}
-	} 
+	}
 	//�����ж�
 	function isEmail(val){
 		var email = /^\w+\@[A-Za-z0-9]+\.[A-Za-z]{2,4}$/i;
 		if(email.test(val)){
 			return true;
 		}
-	} 
+	}
 
 	//�绰�ж�
 	function isPhone(val){
@@ -491,7 +494,7 @@
 		if(phone.test(val)){
 			return true;
 		}
-	} 
+	}
 
 	//��Χ�����
 	function randomRange(start,end){
@@ -510,7 +513,7 @@
 	};
 	//ʮ��������ɫ
 	function randomColor16(){
-		//0-255	
+		//0-255
 		var r = Math.random(255).toString(16);
 		var g = Math.random(255).toString(16);
 		var b = Math.random(255).toString(16);
@@ -553,7 +556,7 @@
 	function mix(target,source){
 		var arr = [];
 		var args = arr.slice.call(arguments);
-		
+
 		var i = 1;
 		if(args.length==1){
 			return target;
@@ -583,16 +586,16 @@
 				stop =document.documentElement.scrollTop;
 				sleft = document.documentElement.scrollLeft;
 			}else{
-			//ie9+ �ȸ� 
+			//ie9+ �ȸ�
 				stop = document.body.scrollTop;
 				sleft = document.body.scrollLeft;
-			}	
+			}
 			x = ev.clientX + sleft;
 			y = ev.clientY + stop;
 		}
 		return {x:x,y:y};
 	};
-	
+
 	//����ת�ַ�
 	function jsonToString(obj) {
 		var THIS = this;
@@ -647,7 +650,7 @@
 			"-moz-user-select" : ""
 		});
 	};
-	
+
 	//dom����
 	function next(obj){
 		return obj.nextSibling.nodeType == 1 ? obj.nextSibling : next(obj.nextSibling);
@@ -733,9 +736,9 @@
 		return string;
 	};
 
-	
+
 	/*���ڹ�����*/
-	$.tmDate = {
+var tmDate = {
 	 /*ת������*/
 	 _transferDate : function(date){
 		if(typeof date =="string"){
@@ -952,12 +955,12 @@
 
 	 /*ĳ�������ǵ����еĵڼ���*/
 	 _getDayOfYear : function(date1){
-		return Math.ceil(this._numDay(this._getFirstDayOfYear(date1),date1));	
+		return Math.ceil(this._numDay(this._getFirstDayOfYear(date1),date1));
 	 },
 
 	 /*ĳ���������ڵ����еĵڼ���*/
 	  _getDayOfMonth : function(date1){
-		return Math.ceil(this._numDay(this._getFirstDayOfMonth(date1),date1));	
+		return Math.ceil(this._numDay(this._getFirstDayOfMonth(date1),date1));
 	 },
 
 	 /*��ȡĳ����������һ��ĵڼ���*/
@@ -978,22 +981,22 @@
 	 _eq : function(date1,date2){
 		 var stime = this._getTime(this._transferDate(date1));
 		 var etime = this._getTime(this._transferDate(date2));
-		 return stime == etime ? true :false; 
+		 return stime == etime ? true :false;
 	 },
 	 /*ĳ�������Ƿ�����ĳ������*/
 	 _after : function(date1,date2){
 		 var stime = this._getTime(this._transferDate(date1));
 		 var etime = this._getTime(this._transferDate(date2));
-		 return  stime < etime ? true :false; 
+		 return  stime < etime ? true :false;
 	 },
 
 	  /*ĳ�������Ƿ�����ĳ������*/
 	 _before : function(date1,date2){
 		 var stime = this._getTime(this._transferDate(date1));
 		 var etime = this._getTime(this._transferDate(date2));
-		 return  stime > etime ? true :false; 
+		 return  stime > etime ? true :false;
 	 },
-	 
+
 	 /*��ȡĳ��ĵ�һ��*/
 	 _getFirstDayOfYear : function(date){
 		var year = this._getYear(date);
@@ -1039,7 +1042,7 @@
 		 var day = this._getDay(date);
 		 return year+"-"+month+"-"+day+" 23:59:59";
 	 },
-	 
+
 	 /*��ȡ�¸��µĵ�һ��*/
 	 _getNextDayOfMonth: function(date){
 		var year = this._getYear(date);
@@ -1062,7 +1065,7 @@
 		 var day = this._getDay(date);
 		 return year+"-"+month+"-"+day+" 00:00:00";
 	 },
-	 
+
 	 _getLastOfWeek : function(date1){
 		 var week = 6-this._getWeek(date1);
 		 var date = this._minusDays(date1,week);
@@ -1071,9 +1074,9 @@
 		 var day = this._getDay(date);
 		 return year+"-"+month+"-"+day+" 23:59:59";
 	 },
-	 
+
 	 _getNow : function(){
-		return new Date();	
+		return new Date();
 	 },
 	 _format : function(date){
 		return this._getYear(date)+"-"+this._getMonth(date)+"-"+this._getDay(date)+" "+this._getHour(date)+":"+this._getMinute(date)+":"+this._getSecond(date);
@@ -1162,14 +1165,14 @@
 	 _getMessage : function(date){
 		 var now = date||new Date();
 		 var hour = now.getHours() ;
-		 if(hour < 6){return "�賿�ã�";} 
-		 else if (hour < 9){return "���Ϻã�";} 
-		 else if (hour < 12){return "����ã�";} 
-		 else if (hour < 14){return "����ã�";} 
-		 else if (hour < 17){return "����ã�";} 
-		 else if (hour < 19){return "����ã�";} 
-		 else if (hour < 22){return "���Ϻã�";} 
-		 else {return "ҹ��ã�";} 
+		 if(hour < 6){return "�賿�ã�";}
+		 else if (hour < 9){return "���Ϻã�";}
+		 else if (hour < 12){return "����ã�";}
+		 else if (hour < 14){return "����ã�";}
+		 else if (hour < 17){return "����ã�";}
+		 else if (hour < 19){return "����ã�";}
+		 else if (hour < 22){return "���Ϻã�";}
+		 else {return "ҹ��ã�";}
 	 },
 	 /*���� 1970 �� 1 �� 1 ������ĺ�����*/
 	 _getTime : function(date){
@@ -1178,4 +1181,4 @@
 	};
 	/*date end*/
 
-//})();
+//})(jQuery);
