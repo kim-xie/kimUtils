@@ -31,35 +31,44 @@
 
 	//初始化方法
 	function bannerInit($this,opts){
-		var imgList = "" , numList = "";
+		var imgList = "" , firstList = "", lastList = "", numList = "";
 		if(isNotEmpty(opts.imgSrc)){
 			var listLen = opts.imgSrc.length;
 			for(var i=0; i<listLen; i++){
 				imgList += "<li>"+
-									 "		<a href='"+opts.imgUrl[i]+"' class='adv_img' target='_blank' title='"+opts.imgTitle[i]+"'>"+
-			          	 "			<img src='"+opts.imgSrc[i]+"' alt='"+opts.imgTitle[i]+"'>"+
-			          	 "		</a>"+
-									 "</li>";
-
+						   "	<a href='"+opts.imgUrl[i]+"' class='adv_img' target='_blank' title='"+opts.imgTitle[i]+"'>"+
+			          	   "		<img src='"+opts.imgSrc[i]+"' alt='"+opts.imgTitle[i]+"'>"+
+			          	   "	</a>"+
+						   "</li>";
+				firstList ="<li>"+
+						   "	<a href='"+opts.imgUrl[0]+"' class='adv_img' target='_blank' title='"+opts.imgTitle[0]+"'>"+
+			          	   "		<img src='"+opts.imgSrc[0]+"' alt='"+opts.imgTitle[0]+"'>"+
+			          	   "	</a>"+
+						   "</li>";
+				lastList = "<li>"+
+						   "	<a href='"+opts.imgUrl[listLen-1]+"' class='adv_img' target='_blank' title='"+opts.imgTitle[listLen-1]+"'>"+
+			          	   "		<img src='"+opts.imgSrc[listLen-1]+"' alt='"+opts.imgTitle[listLen-1]+"'>"+
+			          	   "	</a>"+
+						   "</li>";
 				numList += "<li></li>";
 			}
-
 			var bannerTemp = "<div id='banner'>"+
-											 "			<ul class='bannerList'>"+imgList+"</ul>"+
-											 "			<ol class='num'>"+numList+"</ol>"+
-											 "			<span class='prev'>&lt;</span>"+
-											 "			<span class='next'>&gt;</span>"+
-											 "</div>";
+							 "	<ul class='bannerList'>"+ lastList + imgList + firstList +"</ul>"+
+							 "	<ol class='num'>"+numList+"</ol>"+
+							 "	<span class='prev'>&lt;</span>"+
+							 "	<span class='next'>&gt;</span>"+
+							 "</div>";
 
 		 $this.append(bannerTemp);
 
 		 $this.find("#banner").width($this.width()).height($this.height());
+		 $this.find("#banner .bannerList li img").width($this.width()).height($this.height());
 		 if(opts.border){
 			 $this.find("#banner").css("border",opts.border);
 		 }
 		 var olDom = $this.find("#banner ol.num");
 		 var liDom = $this.find("#banner ol.num li");
-		 var liLen = liDom.size();
+		 var liLen = liDom.length;
 		 liDom.first().addClass("on");
 		 olDom.width(12*(liLen-1) + (liLen+1)*15 + 30);
 		 olDom.css("left",($this.width() - olDom.width())/2 + "px");
@@ -102,10 +111,10 @@
 				$litab.eq($liIndex).addClass("on").siblings().removeClass("on");
 				$bannerUl.stop(true,true).animate({
 					"left":-($index+1)*imgWidth},500,function(){
-					if($index < 0){
-						$bannerUl.css("left",-($litab.length)*imgWidth);
-						$index = $litab.length -1;
-					}
+						if($index < 0){
+							$bannerUl.css("left",-($litab.length)*imgWidth);
+							$index = $litab.length -1;
+						}
 				});
 			}
 		}).mousedown(function(){return false;});
