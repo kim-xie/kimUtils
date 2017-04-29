@@ -1,31 +1,10 @@
 ;(function() {
-	var loadingCss = {
-		css: function(path){
-			var path = loadingCss.getParentPath() + path;
-			if(!path || path.length === 0){
-				throw new Error('argument "path" is required !');
-			}
-			var head = document.getElementsByTagName('head')[0];
-			var link = document.createElement('link');
-			link.href = path;
-			link.rel = 'stylesheet';
-			link.type = 'text/css';
-			head.appendChild(link);
-		},
-		getParentPath:function(){
-			var ParentPath = document.scripts;
-			ParentPath = ParentPath[ParentPath.length-1].src.substring(0,ParentPath[ParentPath.length-1].src.lastIndexOf("/")+1);
-			return ParentPath;
-		}
-	}
-	loadingCss.css("skin/tree.css");
-
     var treeBlankCount = 0,tableTreeArr = [];
     (function($) {
         var treeLineCount = 0,/*tree_zindex=1,*/rootId = "";
-        $.fn.kimTree = function(options) {
+        $.fn.tmTree = function(options) {
             return this.each(function() {
-                var opts = $.extend({}, $.fn.kimTree.defaults, $.fn.kimTree.parseOptions($(this)), options);
+                var opts = $.extend({}, $.fn.tmTree.defaults, $.fn.tmTree.parseOptions($(this)), options);
                 init($(this), opts);
             });
         };
@@ -48,7 +27,7 @@
                 var childJson = opts.children[rootData.pid];
                 treeHtml.push("<ul class='tree treeFolder'>"+dateMessage("", treeLineCount, rootData, childJson, opts)+"</ul>");
             }
-            treeWrap = "<div id='treeWrap'><div id='treeRoot'>"+treeHtml.join("")+"</div><div id='searchRoot'><ul class='searchList'></ul></div><div id='overlay'><div class='imgBox'><img src='tree/skin/img/loading.gif' style='vertical-align:middle;margin-right:6px;'><span style='font-size:12px;color:#fff'></span></div></div></div>";
+            treeWrap = "<div id='treeWrap'><div id='treeRoot'>"+treeHtml.join("")+"</div><div id='searchRoot'><ul class='searchList'></ul></div><div id='overlay'><div class='imgBox'><img src='"+G_CTX+"/scripts/tree/img/loading.gif' style='vertical-align:middle;'><span style='font-size:12px;color:#fff'></span></div></div></div>";
             $this.append(root+treeWrap);
             initEvent($this, opts);
             tm_tree_line_icons($this, opts);
@@ -71,8 +50,7 @@
             if (isNotEmpty(opts.border)) {
                 $this.css("border", opts.border);
             }
-
-			$this.find("#overlay .imgBox").css({"left":($this.width() - 100)/2 +"px","top": ($this.find("#treeWrap").height() - 100)/2+"px"});
+            $this.find("#overlay .imgBox").css({"left":($this.width() - 100)/2 +"px","top": ($this.find("#treeWrap").height() - 100)/2+"px"});
         }
         function dateMessage(rid, treeLineCount, rootData, childrenData, opts) {
            
@@ -161,55 +139,54 @@
             }
         }
         function jsSearch(obj) {
-			
-			setTimeout(function(){
-				var val = $(obj).find(".search_in").val().trim();
-				var tree = $(obj).find(".tree .tm-ui-tree-name");
-				tree.find("a").css("color", "#183152");
-				$(obj).find(".tree .toggle").removeClass("first_collapsable").addClass("expandable");
-				$(obj).find(".tree .father").next().hide();
-				if (isNotEmpty(val)) {
-					var searchLiDom = "";
-					tree.each(function(i) {
-						var treeVal = $(this).text();
-						if (treeVal.toLowerCase().indexOf(val.toLowerCase()) != -1) {
-							//$(this).find("a").css("color", "red");
-							$(this).parent().find(".toggle").removeClass("first_collapsable").addClass("expandable");
-							$(this).parent().next().hide();
-							$(this).parents("ul").each(function() {
-								$(this).show();
-							});
-							
-							searchLiDom += "<li style='line-height:23px;'><div class='folder_checkbox_expandable'>"+$(this).prev().html()+"</div><label class='tm-ui-tree-name'>"+$(this).html()+"</label></li>";
-							
-							var liDom = $(this).parents("li");
-							liDom.each(function(i) {
-								$(this).children(".father").find(".toggle").removeClass("expandable").addClass("first_collapsable");
-								liDom.eq(0).children(".father").find(".toggle").removeClass("first_collapsable").addClass("expandable");
-							});
-						}
-					});
-					$(obj).find("#treeRoot").hide();
-					$(obj).find("#searchRoot").show();
-					$(obj).find("#searchRoot .searchList").html("").append(searchLiDom);
-					
-					if (tree.text().toLowerCase().indexOf(val.toLowerCase()) == -1) {
-						$(obj).find(".inputclear").removeClass("cd").removeClass("cb").addClass("tm_red");
-					} else {
-						$(obj).find(".inputclear").removeClass("cd").removeClass("tm_red").addClass("cb");
-					}
-					
-				} else {
-					$(obj).find(".tree .toggle").each(function() {
-						$(this).removeClass("first_collapsable").addClass("expandable");
-						$(obj).find(".tree ul").css("display", "none");
-					});
-					$(obj).find("#treeRoot").show();
+        	setTimeout(function(){
+	            var val = $(obj).find(".search_in").val().trim();
+	            var tree = $(obj).find(".tree .tm-ui-tree-name");
+	            tree.find("a").css("color", "#183152");
+	            $(obj).find(".tree .toggle").removeClass("first_collapsable").addClass("expandable");
+	            $(obj).find(".tree .father").next().hide();
+	            if (isNotEmpty(val)) {
+	            	var searchLiDom = "";
+	                tree.each(function(i) {
+	                    var treeVal = $(this).text();
+	                    if (treeVal.toLowerCase().indexOf(val.toLowerCase()) != -1) {
+	                        //$(this).find("a").css("color", "red");
+	                        $(this).parent().find(".toggle").removeClass("first_collapsable").addClass("expandable");
+	                        $(this).parent().next().hide();
+	                        $(this).parents("ul").each(function() {
+	                            $(this).show();
+	                        });
+	                        
+	                        searchLiDom += "<li style='line-height:23px;'><div class='folder_checkbox_expandable'>"+$(this).prev().html()+"</div><label class='tm-ui-tree-name'>"+$(this).html()+"</label></li>";
+	                        
+	                        var liDom = $(this).parents("li");
+	                        liDom.each(function(i) {
+	                            $(this).children(".father").find(".toggle").removeClass("expandable").addClass("first_collapsable");
+	                            liDom.eq(0).children(".father").find(".toggle").removeClass("first_collapsable").addClass("expandable");
+	                        });
+	                    }
+	                });
+	                
+	                $(obj).find("#treeRoot").hide();
+                    $(obj).find("#searchRoot").show();
+	                $(obj).find("#searchRoot .searchList").html("").append(searchLiDom);
+	                
+	                if (tree.text().toLowerCase().indexOf(val.toLowerCase()) == -1) {
+	                    $(obj).find(".inputclear").removeClass("cd").removeClass("cb").addClass("tm_red");
+	                } else {
+	                    $(obj).find(".inputclear").removeClass("cd").removeClass("tm_red").addClass("cb");
+	                }
+	                
+	            } else {
+	                $(obj).find(".tree .toggle").each(function() {
+	                    $(this).removeClass("first_collapsable").addClass("expandable");
+	                    $(obj).find(".tree ul").css("display", "none");
+	                });
+	                $(obj).find("#treeRoot").show();
 					$(obj).find("#searchRoot").hide();
-				}
-				$(obj).find("#overlay").hide();
-			},1000);
-            
+	            }
+	            $(obj).find("#overlay").hide();
+        	},1000);
         }
         
         function initEvent($this, opts) {
@@ -258,7 +235,7 @@
                     "margin-top": "0px"
                 });
                 $this.find(".searchbutton").click(function() {
-					setTimeout(function(){
+                	setTimeout(function(){
 						$this.find("#overlay").show();
 					},0);
                     jsSearch($this);
@@ -278,18 +255,18 @@
                     $(this).parent().find(".search_in").val("");
                     $this.scrollTop(0);
                     $(this).hide();
-					setTimeout(function(){
+                    setTimeout(function(){
 						$this.find("#overlay").show();
 					},0);
-					jsSearch($this);
+                    jsSearch($this);
                 });
                
                 $this.find(".search_in").keydown(function(e) {
                     var e = e || window.event || arguments.callee.caller.arguments[0];
                     if (e.keyCode == 13) {
-						setTimeout(function(){
-							$this.find("#overlay").show();
-						},0);
+                    	setTimeout(function(){
+    						$this.find("#overlay").show();
+    					},0);
                         jsSearch($this);
                     }
                 });
@@ -301,14 +278,16 @@
                 		var opid = target.getAttribute("opid");
                 		$this.find("#treeRoot .tree #tm-tree-name-"+opid).prev().find(".tm-tree-" + opts.type).trigger("click");
                 		var newClassName = $this.find("#treeRoot .tree #tm-tree-name-"+opid).prev().find(".tm-tree-" + opts.type).attr("class");
+                		//给目标对象添加class样式
                 		target.className = newClassName;
+                		//同步状态
                 		jsSearch($this);
             		}
                 });
             }
             if (opts.showSearch && opts.searchMethod == "java") {
                 $this.find(".rootDiv").css({
-                    "margin-top": "0px"
+                    "margin-top": "40px"
                 });
                 $this.find(".searchbutton").click(function() {
                     javaSearch($this);
@@ -476,12 +455,14 @@
                             }
                         }
                     }
+                    
+                    //打钩取消操作
                     var opid = $(this).attr("opid");
                     var pid = $(this).attr("pid");
                     var $parent = $this.find("#treeRoot #tm-tree-" + opid);
                     var $parents = $this.find("#treeRoot #tm-tree-" + pid);
                     if (!$(this).hasClass("tm-tree-" + opts.type + "-checked")) {
-                    	
+                    	//打钩
                         $(this).addClass("tm-tree-" + opts.type + "-checked");
                         $parent.each(function() {
                             $(this).find(".tm-tree-" + opts.type).addClass("tm-tree-" + opts.type + "-checked");
@@ -501,7 +482,7 @@
                             }
                         });
                     } else {
-                    	
+                    	//取消打钩
                         $(this).removeClass("tm-tree-" + opts.type + "-focus").removeClass("tm-tree-" + opts.type + "-checked");
                         $parent.each(function() {
                             $(this).find(".tm-tree-" + opts.type).removeClass("tm-tree-" + opts.type + "-focus").removeClass("tm-tree-" + opts.type + "-checked");
@@ -519,6 +500,7 @@
                             }
                         });
                     }
+                    
                     //点击子节点后父节点选中状态被取消并且不是原始已选数据
                     if (opts.limit && !$(this).hasClass("limit")) {
                         var parentChecked = $(this).parents(".treeFolder").find(".father:first").find(".limit").hasClass("tm-tree-checkbox-checked");
@@ -544,7 +526,8 @@
                     var chkParentNameArr = [];
                     var focusOpidArr = [];
                     var focusNameArr = [];
-                    $this.find(".tm-tree-" + opts.type + "-checked").each(function() {
+                    
+                    $this.find("#treeRoot .tm-tree-" + opts.type + "-checked").each(function() {
                         if ($(this).hasClass("markParent")) {
                             var parentName = $(this).parent().next().text().replace(/[\t|\n|\s+]/g, "");
                             var parentOpid = $(this).attr("opid");
@@ -561,7 +544,7 @@
                         chkOpidArr.push(opid);
                         chkNameArr.push(name);
                     });
-                    $this.find(".tm-tree-" + opts.type + "-focus").each(function() {
+                    $this.find("#treeRoot .tm-tree-" + opts.type + "-focus").each(function() {
                         var name = $(this).parent().next().text();
                         focusOpidArr.push($(this).attr("opid"));
                         focusNameArr.push(name);
@@ -639,13 +622,13 @@
                 $(".file").removeClass("folder_expandable");
             }
         };
-        $.fn.kimTree.parseOptions = function($target) {
+        $.fn.tmTree.parseOptions = function($target) {
             return {
                 width: $target.attr("width"),
                 height: $target.attr("height")
             };
         };
-        $.fn.kimTree.methods = {
+        $.fn.tmTree.methods = {
             remove: function($this) {
                 $this.remove();
             }
@@ -659,7 +642,7 @@
                 y: posY
             };
         };
-        $.fn.kimTree.defaults = {
+        $.fn.tmTree.defaults = {
             root: [{
                 name: "主题框架1",
                 url: "",
@@ -809,7 +792,7 @@
             border: "",
             onclick: function($obj, data) {}
         };
-        $.kimTree = {
+        $.tmTree = {
             _expand: function(pid, obj, e) {
                 tableTreeArr = [];
                 var $this = $(obj);
@@ -864,7 +847,7 @@
                 var html = "",n = 1;
                 for (var i = 0, initRootLen = root.length; i < initRootLen; i++, n++) {
                     var data = root[i];
-                    var chhtml = "<img id=\"tm_items_expand_" + data.pid + "\"  class=\"tm-icon\" style=\"CURSOR: pointer;\"  onclick=\"$.kimTree._expand(" + data.pid + ",this,event);\" src=\"../../images/treetable/plus.gif\"><img style=\"position: relative;top:2px;\"  src=\"../../images/treetable/fshut.gif\">";
+                    var chhtml = "<img id=\"tm_items_expand_" + data.pid + "\"  class=\"tm-icon\" style=\"CURSOR: pointer;\"  onclick=\"$.tmTree._expand(" + data.pid + ",this,event);\" src=\"../../images/treetable/plus.gif\"><img style=\"position: relative;top:2px;\"  src=\"../../images/treetable/fshut.gif\">";
                     if (isEmpty(children[data.pid])) {
                         chhtml = "<img class=\"tm_tree_leaf tm-icon \"  src=\"../../images/treetable/leaf.gif\">";
                     }
@@ -881,7 +864,7 @@
                         treeBlankCount++;
                         for (var i = 0,childArrLen = childrenArr.length; i < childArrLen; i++, n++) {
                             var data = childrenArr[i];
-                            var chhtml = "<img id=\"tm_items_expand_" + data.pid + "\" style=\"CURSOR: pointer;\" class=\"tm-icon\" onclick=\"$.kimTree._expand(" + data.pid + ",this,event);\" src=\"../../images/treetable/plus.gif\"><img style=\"position: relative;top:2px;\" src=\"../../images/treetable/fshut.gif\">";
+                            var chhtml = "<img id=\"tm_items_expand_" + data.pid + "\" style=\"CURSOR: pointer;\" class=\"tm-icon\" onclick=\"$.tmTree._expand(" + data.pid + ",this,event);\" src=\"../../images/treetable/plus.gif\"><img style=\"position: relative;top:2px;\" src=\"../../images/treetable/fshut.gif\">";
                             if (isEmpty(children[data.pid])) {
                                 chhtml = "<img class=\"tm_tree_leaf tm-icon\"  src=\"../../images/treetable/leaf.gif\">";
                             }

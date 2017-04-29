@@ -20,7 +20,7 @@
 	}
 	loadingCss.css("skin/loading.css");
 
-	//jquery²å¼þµÄ¶¨Òå·½Ê½
+	//jqueryï¿½ï¿½ï¿½ï¿½ï¿½Ä¶ï¿½ï¿½å·½Ê½
 	var Loading = function(message,options){
 		var opts = $.extend({},options);
 		this.init(message,opts.timeout,opts);
@@ -30,18 +30,22 @@
 		init : function(message,timeout,opts){
 			var $loading = this.template(message,opts);
 			if($loading){
-				//¶¨Î»	
-				kimUtil._position($loading).resize($loading);
-				//ÊÂ¼þ°ó¶¨
+				if(opts.parent){
+					kimUtil._positionParent($loading,opts.parent).resize($loading);
+				}else{
+					//ï¿½ï¿½Î»
+					kimUtil._position($loading).resize($loading);
+				}
+				//ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½
 				this.events($loading,function(){
 					if(opts.top)$loading.css("top",opts.top);
 					if(opts.left)$loading.css("left",opts.left);
 				});
-				//Ê±¼ä¹Ø±Õ
+				//Ê±ï¿½ï¿½ï¿½Ø±ï¿½
 				this.timeout($loading,timeout);
 			}
 		},
-		
+
 		template:function(content,opts){
 			var $loading = $("#Loading");
 			if(content == "remove"){
@@ -58,9 +62,17 @@
 				var $loadingContent = $("<div class='tzui-loading-cnt'></div>");
 				$loadingContent.html(content);
 				$loading.append($loadingGif).append($loadingContent);
-				$("body").append($loading);
+				if(opts.parent){
+					opts.parent.append($loading);
+				}else{
+					$("body").append($loading);
+				}
 				if(opts.overlay){
-					$("body").append("<div class='tzui-loading-overlay bg3'></div>");
+					if(opts.parent){
+						opts.parent.append("<div class='tzui-loading-overlay bg3'></div>");
+					}else{
+						$("body").append("<div class='tzui-loading-overlay bg3'></div>");
+					}
 					$loading.next().click(function(){
 						$(this).remove();
 						$loading.trigger("click");
@@ -69,7 +81,7 @@
 			}else{
 				$loading.find(".tzui-loading-cnt").html(content);
 			}
-			
+
 			if(opts.height){$loading.height(opts.height);}
 
 			return $loading;
@@ -88,7 +100,7 @@
 			if(isNotEmpty(timeout+"") && timeout >0){
 				clearTimeout(timr);
 				timr = setTimeout(function(){
-					//ÊÂ¼þµÄ´¥·¢
+					//ï¿½Â¼ï¿½ï¿½Ä´ï¿½ï¿½ï¿½
 					$loading.trigger("click");
 					$loading.next().remove();
 				},timeout*500);
@@ -96,11 +108,15 @@
 		}
 	};
 
-	var loading = function(message,timeout,overlay){
-		new Loading(message,{"timeout":timeout,overlay:overlay});
+	var loading = function(message,timeout,overlay,parent){
+		if(parent){
+			new Loading(message,{"timeout":timeout,overlay:overlay,parent:parent});
+		}else{
+			new Loading(message,{"timeout":timeout,overlay:overlay});
+		}
 	};
 
-	//¼ÓÔØloading
+	//ï¿½ï¿½ï¿½ï¿½loading
 	$.loading = function(options){
 		var opts = $.extend({},$.loading.template,$.loading.defaults,options);
 		if(isEmpty(opts.mark)){opts.mark = Math.floor(Math.random() * 10);}
@@ -261,7 +277,7 @@
 	}
 
 	var kimUtil = {
-		_position : function($dom,amark){//¾ÓÖÐ¶¨Î»
+		_position : function($dom,amark){//ï¿½ï¿½ï¿½Ð¶ï¿½Î»
 			var windowWidth = $(window).width();
 			var windowHeight= $(window).height();
 			var width = $dom.width();
@@ -275,7 +291,7 @@
 			return this;
 		},
 
-		_positionParent : function($dom,$parent,atop){//¾ÓÖÐ¶¨Î»
+		_positionParent : function($dom,$parent,atop){//ï¿½ï¿½ï¿½Ð¶ï¿½Î»
 			var parentWidth = $parent.width();
 			var parentHeight= $parent.height();
 			var width = $dom.width();
@@ -289,7 +305,7 @@
 		resize : function($dom){
 			var $this = this;
 			$(window).resize(function(){
-				$this._position($dom);	
+				$this._position($dom);
 			});
 		},
 		animates:function($dom,mark,callback){
