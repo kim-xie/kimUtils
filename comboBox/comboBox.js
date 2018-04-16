@@ -35,19 +35,19 @@
 		var kimComboBox = "<div id='kimComboBoxWrap' class='kimComboBoxWrap'>";
 		
 		if(opts.removeIdsObj && opts.validateId && opts.validateIdType){
-			kimComboBox +=	"<input id='"+opts.removeIdsObj+"' name='"+opts.removeIdsObj+"' type='hidden' class='vilidateObj removeIds' vilidate='"+opts.validateIdType+"'/>";
+			kimComboBox +=	"<input id='"+opts.removeIdsObj+"' name='"+opts.inputName+"' type='hidden' class='vilidateObj removeIds' vilidate='"+opts.validateIdType+"'/>";
 		}else if(opts.removeIdsObj){
-			kimComboBox +=	"<input id='"+opts.removeIdsObj+"' name='"+opts.removeIdsObj+"' type='hidden' class='removeIds'/>";
+			kimComboBox +=	"<input id='"+opts.removeIdsObj+"' name='"+opts.inputName+"' type='hidden' class='removeIds'/>";
 		}
 		if(opts.addIdsObj && opts.validateId && opts.validateIdType){
-			kimComboBox +=	"<input id='"+opts.addIdsObj+"' name='"+opts.addIdsObj+"' type='hidden' class='vilidateObj addIds' vilidate='"+opts.validateIdType+"'/>";
+			kimComboBox +=	"<input id='"+opts.addIdsObj+"' name='"+opts.inputName+"' type='hidden' class='vilidateObj addIds' vilidate='"+opts.validateIdType+"'/>";
 		}else if(opts.addIdsObj){
-			kimComboBox +=	"<input id='"+opts.addIdsObj+"' name='"+opts.addIdsObj+"' type='hidden' class='addIds'/>";
+			kimComboBox +=	"<input id='"+opts.addIdsObj+"' name='"+opts.inputName+"' type='hidden' class='addIds'/>";
 		}
 		if(opts.idObj && opts.validateId && opts.validateIdType){
-			kimComboBox +=	"<input id='"+opts.idObj+"' name='"+opts.idObj+"' value='"+opts.idValue+"' type='hidden' class='vilidateObj ids' vilidate='"+opts.validateIdType+"'/>";
+			kimComboBox +=	"<input id='"+opts.idObj+"' name='"+opts.inputName+"' value='"+opts.idValue+"' type='hidden' class='vilidateObj ids' vilidate='"+opts.validateIdType+"'/>";
 		}else if(opts.idObj){
-			kimComboBox +=	"<input id='"+opts.idObj+"' name='"+opts.idObj+"' value='"+opts.idValue+"' type='hidden' class='ids'/>";
+			kimComboBox +=	"<input id='"+opts.idObj+"' name='"+opts.inputName+"' value='"+opts.idValue+"' type='hidden' class='ids'/>";
 		}
 		
 		kimComboBox += "<span class='kimComboBox'>";
@@ -69,20 +69,19 @@
 			kimComboBox += "<div id='"+opts.listId+"' class='"+opts.listClass+" none' style='position:absolute;z-index:1000;'>";
 		} 
 		if(opts.listType && opts.listType == "list" && opts.showSearch ){
-			kimComboBox += "<div class='searchBox'>	<span class='searchwrap'><input type='text' class='search_in' maxlength='30' placeholder='请输入搜索关键字...'><i class='fa fa-times-circle fa-lg inputclear cd'></i><span class='searchbutton'>搜  索</span></span></div>";
+			kimComboBox += "<div class='searchBox'>	<span class='searchwrap'><input type='text' class='search_in' maxlength='30' placeholder='请输入搜索关键字...'/><i class='fa fa-times-circle fa-lg inputclear cd'></i><span class='searchbutton'>搜  索</span></span></div>";
 		}
 		if(opts.listType && opts.listType == "list" && opts.listcontents ){
 			kimComboBox += "<div id='listBox'><div id='listRoot'><ul>";
 			var liDom = "";
 			for(var i=0;i<opts.listcontents.length;i++){
-				
 				if(opts.showCheckBox){
-					liDom += "<li><a href='javascript:void(0)' style='display:block;padding:5px;font-size:14px' data-id='"+opts.listids[i]+"'><input type='checkBox' style='display:inline-block;width:16px;height:16px;margin-right:5px;vertical-align:top;'>"+opts.listcontents[i]+"</a></li>";
+					liDom += "<li><a href='javascript:void(0)' style='display:block;padding:0 5px;font-size:12px' data-id='"+opts.listids[i]+"' title='"+opts.listcontents[i]+"'><input type='checkBox' style='display:inline-block;width:16px;height:16px;margin-right:5px;vertical-align:top;'>"+opts.listcontents[i]+"</a></li>";
 				}else{
-					liDom += "<li><a href='javascript:void(0)' style='display:block;padding:5px;font-size:14px' data-id='"+opts.listids[i]+"'>"+opts.listcontents[i]+"</a></li>";
+					liDom += "<li><a href='javascript:void(0)' style='display:block;padding:0 5px;font-size:12px' data-id='"+opts.listids[i]+"' title='"+opts.listcontents[i]+"'>"+opts.listcontents[i]+"</a></li>";
 				}
 			}
-			kimComboBox += liDom + "</ul></div><div id='searchRoot'><ul class='searchList'></ul></div><div id='overlay'><div class='imgBox'><img src='comboBox/skin/img/loading.gif' style='vertical-align:middle;margin-right:6px;'><span style='font-size:12px;'></span></div></div></div>";
+			kimComboBox += liDom + "</ul></div><div id='searchRoot'><ul class='searchList'></ul></div><div id='overlay'><div class='imgBox'><img src='"+G_CTX+"/scripts/cgb/comboBox/skin/img/loading.gif' style='vertical-align:middle;'><span style='font-size:12px;'></span></div></div></div>";
 		}
 
 		kimComboBox += "</div></div>";
@@ -91,13 +90,19 @@
 		/*if(opts.showSearch){
 			$this.find("#listBox").css("margin-top","40px");
 		}*/
+		
 		if(opts.width){
 			$this.find(".kimComboBox").width(opts.width);
+			$this.find("#listBox li").css({"display":"block","height":"28px","line-height":"28px"});
+			$this.find("#listBox li a").width(opts.width).css({"display":"inline-block","padding":"0 0 0 4px","width":"98%","text-overflow":"ellipsis","overflow": "hidden","white-space":"nowrap"});
+			$this.find("#listBox li a input").css({"margin-bottom":"3px","vertical-align":"middle"});
 		}
 		if(opts.height){
 			$this.find(".kimComboBox").height(opts.height);
+			$this.find(".kimComboBox .contents").css("line-height",opts.height+"px");
+			$this.find(".kimComboBox .icon i").css("line-height",opts.height+"px");
 		}
-
+		
 		if(opts.searchBoxWidth){
 			$this.find(".searchBox").width(opts.searchBoxWidth);
 		}
@@ -109,7 +114,11 @@
 		}
 		if(opts.listHeight){
 			$this.find("."+opts.listClass+"").height(opts.listHeight);
-			$this.find("#listBox").height(parseInt(opts.listHeight) - $this.find(".searchBox").height() - 10);
+			if($this.find("#listBox").prev().hasClass("searchBox")){
+				$this.find("#listBox").height(parseInt(opts.listHeight) - 38);
+			}else{
+				$this.find("#listBox").height(parseInt(opts.listHeight));
+			}
 		}
 		if(opts.listBackground){
 			$this.find("."+opts.listClass+"").css("background",opts.listBackground);
@@ -124,27 +133,43 @@
 	//初始化事件
 	function initEvent($this,opts){
 		
-		if(opts.triggerClick){
-			//showClear($this);
+		if(!opts.disable){
+			//展开收起下拉列表
+			$this.find(".kimComboBox").click(function(e){
+				var e = e || window.event || arguments.callee.caller.arguments[0]; //兼容firefox
+				stopPropagation(e);
+				$(this).children().first().css("user-select","none");
+				$(this).parent().find("."+opts.listClass+"").toggle();
+				if($(this).parents("td")){
+					$(this).parents("td").siblings().find("."+opts.listClass+"").hide();
+					$(this).parents("tr").siblings().find("."+opts.listClass+"").hide();
+				}
+				if($(this).parents("li div:last-child").hasClass("seSpan")){
+					$(this).parents("li").siblings().find(".comboBoxList").hide();
+				}
+				if($(this).parents(".outDutyOrgsBox")){
+					$(this).parents(".outDutyOrgsBox").siblings().find(".comboBoxList").hide();
+				}
+				stopDefault(e);
+			});
+			if(opts.triggerClick){
+				//showClear($this);
+				if(opts.showClearButton){
+					$this.hover(function(){
+						showClear($this);
+					},function(){
+						$this.find(".contents").parent().find(".selectclear").hide();
+					});
+				}
+			}
+		}else{
+			$this.find(".kimComboBox").css("background","#f3f3f3");
 			$this.hover(function(){
-				showClear($this);
+				$this.find(".contents").parent().find(".selectclear").hide();
 			},function(){
 				$this.find(".contents").parent().find(".selectclear").hide();
 			});
 		}
-
-		//展开收起下拉列表
-		$this.find(".kimComboBox").click(function(e){
-			var e = e || window.event || arguments.callee.caller.arguments[0]; //兼容firefox
-			stopPropagation(e);
-			$(this).children().first().css("user-select","none");
-			$(this).parent().find("."+opts.listClass+"").toggle();
-			if($(this).parents("td")){
-				$(this).parents("td").siblings().find("."+opts.listClass+"").hide();
-				$(this).parents("tr").siblings().find("."+opts.listClass+"").hide();
-			}
-			stopDefault(e);
-		});
 		
 		//下拉框为数控件时的初始化事件
 		if(opts.listType && opts.listType == "tree" && opts.tree){
@@ -156,7 +181,8 @@
 			var e = e || window.event || arguments.callee.caller.arguments[0]; //兼容firefox
 			stopPropagation(e);
 			$(this).parents("#kimComboBoxWrap").find(".contents").text("");
-			
+			$(this).parents("#kimComboBoxWrap").find("input").val("");
+			$this.find("#listBox #listRoot ul li").find("a").removeClass("on");
 			if(opts.listType == "tree"){
 				$(this).parents("#kimComboBoxWrap").find(".trees .search_in").val("");
 				$(this).parents("#kimComboBoxWrap").find(".trees .tm-tree-checkbox").removeClass("tm-tree-checkbox-checked").removeClass("tm-tree-checkbox-focus");
@@ -171,14 +197,15 @@
 		
 		//给list内容框赋值
 		if(opts.listType == "list" && opts.listcontents){
-			 $this.click(function(e) {
+			
+			$this.click(function(e) {
                 var e = e || window.event || arguments.callee.caller.arguments[0];
                 stopPropagation(e);
             });
 
 			if (opts.showSearch) {
                 $this.find(".searchbutton").click(function() {
-					setTimeout(function(){
+                	setTimeout(function(){
 						$this.find("#overlay").show();
 					},0);
                     search($this);
@@ -207,28 +234,42 @@
                 $this.find(".search_in").keydown(function(e) {
                     var e = e || window.event || arguments.callee.caller.arguments[0];
                     if (e.keyCode == 13) {
-						setTimeout(function(){
-							$this.find("#overlay").show();
-						},0);
+                    	setTimeout(function(){
+    						$this.find("#overlay").show();
+    					},0);
                         search($this);
                     }
                 });
-				if(opts.triggerClick){
-					//事件委托
-					$this.find("#searchRoot").bind("click",function(e){
-						e = e || window.event || arguments.callee.caller.arguments[0];
-						var target = e.target || e.srcElement;
-						
-						if(target.nodeName.toLowerCase() === "a"){
+                
+                //事件委托
+                $this.find("#searchRoot").bind("click",function(e){
+                	e = e || window.event || arguments.callee.caller.arguments[0];
+                	var target = e.target || e.srcElement;
+                	if(target.nodeName.toLowerCase() === "a"){
+                		if(opts.isMultiSelect){
+                			
+						}else{
 							var opid = target.getAttribute("data-id");
-							$this.find("#listRoot li a[data-id="+opid+"]").trigger("click");
-							//$(this).find("input:checkbox").trigger("click");
-							search($this);
-						}else if(target.nodeName.toLowerCase() === "input"){
-							
+							$(this).find("input:checkbox").trigger("click");
+	                		$this.find("#listRoot li a[data-id="+opid+"]").trigger("click");
+	                		search($this);
 						}
-					});
-				}
+                		
+            		}else if(target.nodeName.toLowerCase() === "input"){
+						if(opts.showCheckBox){
+	            			if(opts.isMultiSelect){
+	            				var opid = target.parentNode.getAttribute("data-id");
+								$this.find("#listRoot li a[data-id='"+opid+"'] input[type='checkbox']").trigger("click");
+							}else{
+								var opid = target.parentNode.getAttribute("data-id");
+								$this.find("#listRoot li a[data-id='"+opid+"'] input[type='checkbox']").trigger("click");
+								
+								var liDom = target.parentNode.parentNode;
+								$(liDom).siblings().find("input:checkbox").prop("checked",false);
+							}
+						}
+            		}
+                });
             }
 			
 			if(opts.triggerClick){
@@ -238,40 +279,114 @@
 					var aText = "";
 					var aId = "";
 					if(target.nodeName.toLowerCase() !== "input"){
-						if(opts.showCheckBox){
-							$(this).find("input:checkbox").trigger("click");
+						if(opts.isMultiSelect){
+							$(this).find("input[type='checkbox']").trigger("click");
+						}else{
+							$(this).addClass("on");
+							$(this).parent().siblings().find("a").removeClass("on");
+							$(this).parents("li").siblings().find("input:checkbox").prop("checked",false);
+							if($(this).find("input:checkbox").prop("checked")===false){
+								$this.find(".contents").text("").attr("title","");
+							}else{
+								aText = $(this).text();
+								aId = $(this).attr("data-id");
+								$this.find(".contents").text(aText).attr("title",aText);
+							}
+							$this.find("#"+opts.idObj).val(aId).attr("title",aId);
+							//点击下拉框数据时触发的方法
+							if(opts.onchange){
+								opts.onchange($this,aId,aText);
+							}
 						}
 					}else if(target.nodeName.toLowerCase() === "input"){
-						
-					}
-					if(opts.isMultiSelect){
-						var checkedNameArr = [];
-						var checkedIdArr = [];
-						$this.find("ul li a input[type='checkbox']:checked").each(function(){
-							checkedNameArr.push($(this).parent().text());
-							checkedIdArr.push($(this).parent().attr("data-id"));
-						});
-						$this.find(".contents").text(checkedNameArr.join(",")).attr("title",checkedNameArr.join(","));
-						$this.find(opts.idObj).val(checkedIdArr.join(",")).attr("title",checkedIdArr.join(","));
-					}else{
-						$(this).parent().siblings().find("input:checkbox").prop("checked",false);
-						if($(this).find("input:checkbox").prop("checked")===false){
-							$this.find(".contents").text("").attr("title","");
-						}else{
+						if(opts.isMultiSelect){
+							var checkedNameArr = [];
+							var checkedIdArr = [];
 							aText = $(this).text();
 							aId = $(this).attr("data-id");
-							$this.find(".contents").text(aText).attr("title",aText);
+							//点击下拉框数据时触发的方法
+							if(opts.onchange){
+								opts.onchange($(this),aId,aText);
+							}
+							$this.find("#listRoot li a input[type='checkbox']:checked").each(function(){
+								checkedNameArr.push($(this).parent().text());
+								checkedIdArr.push($(this).parent().attr("data-id"));
+							});
+							$this.find(".contents").text(checkedNameArr.join(",")).attr("title",checkedNameArr.join(","));
+							$this.find("#"+opts.idObj).val(checkedIdArr);//.attr("title",checkedIdArr.join(","))
+							
+						}else{
+							$(this).addClass("on");
+							$(this).parent().siblings().find("a").removeClass("on");
+							$(this).parents("li").siblings().find("input:checkbox").prop("checked",false);
+							if($(this).find("input:checkbox").prop("checked")===false){
+								$this.find(".contents").text("").attr("title","");
+							}else{
+								aText = $(this).text();
+								aId = $(this).attr("data-id");
+								$this.find(".contents").text(aText).attr("title",aText);
+							}
+							$this.find("#"+opts.idObj).val(aId).attr("title",aId);
+							//点击下拉框数据时触发的方法
+							if(opts.onchange){
+								opts.onchange($this,aId,aText);
+							}
 						}
-						$this.find("#"+opts.idObj).val(aId).attr("title",aId);
 					}
+					
+					//if(opts.showCheckBox){
+						
+					//}
+					
 					//showClear($this);
-					if(opts.onchange){
-						opts.onchange($this,aId,aText);
+					
+					
+					
+					//不是多选的话点击下拉框里的数据就可以收起下拉框
+					if(!opts.showCheckBox){
+						//触发下拉框事件
+						$this.find(".kimComboBox").trigger("click");
 					}
+					
 				});
+				
 			}else{
 				$this.find("input:checkbox").attr("disabled",true);
 			}
+		}
+		
+		//初始化值时根据文本查询对应的ID
+		if(opts.useFindIdByText){
+			var initText = $this.find(".kimComboBoxWrap .contents").text();
+			if(initText){
+				var liDom = $this.find("#listBox #listRoot ul li");
+				liDom.find("a[title='"+initText+"']").addClass("on");
+				var initId = liDom.find("a[title='"+initText+"']").attr("data-id");
+				$this.find(".kimComboBoxWrap input.ids").val(initId);
+			}
+		}
+		
+		//初始化值时根据ID查询对应的文本
+		if(opts.useFindTextById){
+			var initId = $this.find(".kimComboBoxWrap input.ids").val();
+			var liDom = $this.find("#listBox #listRoot ul li");
+			liDom.find("a[data-id='"+initId+"']").addClass("on");
+			var initText = liDom.find("a[data-id='"+initId+"']").text();
+			$this.find(".kimComboBoxWrap .contents").text(initText);
+		}
+		
+		//初始化值时根据IDs查询对应的文本
+		if(opts.useFindTextByIds){
+			var initIds = $this.find(".kimComboBoxWrap input.ids").val().split(",");
+			var liDom = $this.find("#listBox #listRoot ul li");
+			var initText = [];
+			for(var i=0;i<initIds.length;i++){
+				initText.push(liDom.find("a[data-id='"+initIds[i]+"']").text());
+				if(opts.isMultiSelect){
+					liDom.find("a[data-id='"+initIds[i]+"'] input:checkbox").attr("checked",true);
+				}
+			}
+			$this.find(".kimComboBoxWrap .contents").text(initText.join(",")).attr("title",initText.join(","));
 		}
 		
 		//点击文档收起下拉框
@@ -285,10 +400,9 @@
 		setTimeout(function(){
 			var searchVal = $(obj).find(".search_in").val().trim();
 			var list = $(obj).find("#listRoot ul li");
-			
+			$(obj).find("#overlay").show();
 			if (isNotEmpty(searchVal)) {
 				var searchLiDom = "";
-				$(obj).find("#overlay").show();
 				list.each(function(i) {
 					var listVal = $(this).find("a").text();
 					if (listVal.toLowerCase().indexOf(searchVal.toLowerCase()) != -1) {
@@ -300,10 +414,12 @@
 				$(obj).find("#searchRoot").show();
 				$(obj).find("#searchRoot .searchList").html("").append(searchLiDom);
 				
-				if($(obj).find("#searchRoot .searchList li").attr("class")=="true"){
-					$(obj).find("#searchRoot .searchList li a input[type='checkbox']").trigger("click");
-				}
-
+				$("#searchRoot .searchList li").each(function(i){
+					if($(this).attr("class")==="true"){
+						$(this).find("a input[type='checkbox']").prop("checked",true);
+					}
+				});
+	
 				if (list.text().toLowerCase().indexOf(searchVal.toLowerCase()) == -1) {
 					$(obj).find(".inputclear").removeClass("cd").removeClass("cb").addClass("tm_red");
 				} else {
@@ -316,6 +432,7 @@
 			$(obj).find("#overlay").hide();
 		},1000);
 	}
+	
 
 	//默认参数
 	$.fn.kimComboBox.defaults = {
@@ -328,8 +445,9 @@
 		addIdsObj:"",//存放增量ID的Dom对象
 		removeIdsObj:"",//存放删除ID的Dom对象
 		idObj:"",//存放ID的Dom对象
+		inputName: "inputName",//输入框的name值
 		idValue:"",//存放的ID值
-		textId:"contents",
+		textId:"contents",//显示文本框的id
 		textValue:"--请选择一个值--",//展示框的显示值
 		listId:"kimComboBoxList",//下拉框的ID属性
 		listClass:"kimComboBoxList",//下拉框的class属性
@@ -337,14 +455,19 @@
 		listHeight:"200px",//下拉框的高度
 		listBackground:"#fff",//下拉框的背景色
 		listBorder:"1px solid #ddd",//下拉框的边框
-		showSearch:true,
-		searchBoxWidth:"200px",
+		showSearch:true,//是否显示搜索框
+		searchBoxWidth:"200px",//搜索框的宽度
 		listType:"list",//下拉框的类型
+		useFindIdByText: false,//根据文本找对应的ID
+		useFindTextById: false,//根据ID找对应的文本
+		useFindTextByIds: false,//根据多选的ID找到对应的多文本
+		showClearButton: true,//是否显示重置按钮
 		listids:["1111","2222","3333"],//下拉框里的值对应的id
 		listcontents:["list下拉框测试1","list下拉框测试2","list下拉框测试3"],//下拉框里的值（针对下拉框为list类型的值）
 		showCheckBox:true,//是否显示复选框
 		isMultiSelect:false,//是否支持多选
-		triggerClick:true,
+		triggerClick:true,//下拉框里的数据是否可点
+		disable: false,//下拉框是否禁止点击
 		onchange:function(obj,ids,values){},//值变化事件
 		tree:{}//下拉框为树类型的树初始化
 	};
